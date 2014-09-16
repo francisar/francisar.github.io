@@ -1,0 +1,41 @@
+title : Francis' Blog =)
+author : francis
+name : Francis Cui
+email : cpf38267308@gmail.com
+github : francisar
+twitter : cpf382607308
+feedburner : francis
+
+
+
+markdown: rdiscount
+highlighter: true
+
+
+baseurl:    /
+url: "http://francisar.github.io"
+
+
+googleAnaly:
+   config: true
+   id: UA-54861017-1
+
+source:      .
+destination: ./_site
+plugins:     ./_plugins
+layouts: ./layouts
+timezone: Asia/Shanghai
+
+
+coderay:
+   coderay_wrap: div
+   coderay_line_numbers: inline
+   coderay_line_numbers_start: 1
+   coderay_tab_width: 4
+   coderay_bold_every: 10
+   coderay_css: style
+
+
+
+encoding: utf-8
+lsi: true
