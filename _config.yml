@@ -1,4 +1,4 @@
-title : Francis' Blog =)
+title : Francis' Blog
 author : francis
 name : Francis Cui
 email : cpf38267308@gmail.com
@@ -12,7 +12,7 @@ markdown: rdiscount
 highlighter: true
 
 
-baseurl:    "/"
+baseurl:    ""
 url: "http://francisar.github.io"
 
 
