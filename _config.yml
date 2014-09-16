@@ -12,7 +12,7 @@ markdown: rdiscount
 highlighter: true
 
 
-baseurl:    /
+baseurl:    "/"
 url: "http://francisar.github.io"
 
 
@@ -23,7 +23,7 @@ googleAnaly:
 source:      .
 destination: ./_site
 plugins:     ./_plugins
-layouts: ./layouts
+layouts: ./_layouts
 timezone: Asia/Shanghai
 
 
