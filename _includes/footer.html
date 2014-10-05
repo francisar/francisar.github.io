@@ -1,7 +1,6 @@
 <footer id="footer">
 
   <div class="wrapper">
-<p class="copyright">Copyright &copy; {{ site.time | date: '%Y' }} {{ site.name }}.</p>
   
 
     <div class="footer-col-wrapper">
@@ -13,7 +12,7 @@
 
       <div class="footer-col  footer-col-2">
         <ul class="social-media-list">
-          {% if site.github_username %}
+          {% if site.github %}
           <li>
             <a href="https://github.com/{{ site.github_username }}">
               <span class="icon  icon--github">
@@ -27,7 +26,7 @@
           </li>
           {% endif %}
 
-          {% if site.twitter_username %}
+          {% if site.twitter %}
           <li>
             <a href="https://twitter.com/{{ site.twitter_username }}">
               <span class="icon  icon--twitter">
@@ -47,6 +46,7 @@
       <div class="footer-col  footer-col-3">
         <p class="text">{{ site.description }}</p>
       </div>
+<p class="copyright">Copyright &copy; {{ site.time | date: '%Y' }} {{ site.name }}.</p>
     </div>
 
   </div>
