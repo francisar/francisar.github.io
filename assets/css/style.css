@@ -356,5 +356,5 @@ img.center {
 .wrapper:after, .footer-col-wrapper:after { content: ""; display: table; clear: both; }
 
 /** Icons */
-.icon > svg { display: inline-block; width: 60px; height: 60px; vertical-align: middle; }
+.icon > svg { display: inline-block; width:16px; height: 16px; vertical-align: middle; }
 .icon > svg path { fill: #828282; }
