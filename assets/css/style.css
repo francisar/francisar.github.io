@@ -284,6 +284,7 @@ img.center {
 /**
  * Icons
  */
+/*
 .icon {
 
     > svg {
@@ -298,6 +299,7 @@ img.center {
 /**
  * Wrapper
  */
+/*
 .wrapper {
     max-width: -webkit-calc(800px - (#{$spacing-unit} * 2));
     max-width:         calc(800px - (#{$spacing-unit} * 2));
@@ -319,12 +321,12 @@ img.center {
         padding-left: $spacing-unit / 2;
     }
 }
-.footer-col-wrapper {
-    font-size: 15px;
-    color: $grey-color;
-    margin-left: -$spacing-unit / 2;
-    @extend %clearfix;
-}
+/*.footer-col-wrapper {
+#    font-size: 15px;
+#    color: $grey-color;
+#    margin-left: -$spacing-unit / 2;
+#    @extend %clearfix;
+#}
 
 .footer-col {
     float: left;
@@ -345,4 +347,14 @@ img.center {
 .footer-col-3 {
     width: -webkit-calc(45% - (#{$spacing-unit} / 2));
     width:         calc(45% - (#{$spacing-unit} / 2));
-}
+}*/
+/** Wrapper */
+.wrapper { max-width: -webkit-calc(800px - (30px * 2)); max-width: calc(800px - (30px * 2)); margin-right: auto; margin-left: auto; padding-right: 30px; padding-left: 30px; }
+@media screen and (max-width: 800px) { .wrapper { max-width: -webkit-calc(800px - (30px)); max-width: calc(800px - (30px)); padding-right: 15px; padding-left: 15px; } }
+
+/** Clearfix */
+.wrapper:after, .footer-col-wrapper:after { content: ""; display: table; clear: both; }
+
+/** Icons */
+.icon > svg { display: inline-block; width: 60px; height: 60px; vertical-align: middle; }
+.icon > svg path { fill: #828282; }
