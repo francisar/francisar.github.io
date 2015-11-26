@@ -39,8 +39,8 @@ timeline:
 - num: 1
   word: 2015/11/21-DDD
 - num: 2
-  word: 2014/11/26-XXX
-- num: 4
+  word: 2015/11/26-XXX
+- num: 3
   word: More
 widgets: 
 - calendar
