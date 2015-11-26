@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello Qunee for HTML5</title>
+    <meta charset="utf-8">
+</head>
+<body>
+<div style="position: absolute; width: 100%; top: 0px; bottom: 0px;" id="canvas" ></div>
+<script src="blogjs/qunee-module.js"></script>
+<script>
+
+   /**
+* This file is part of Qunee for HTML5.
+* Copyright (c) 2015 by qunee.com
+**/
+var graph = new Q.Graph(canvas);
+graph.zoomToOverview();
+
+var idIndex = 0;
+function createServerNode(name,x, y){
+    var node = graph.createNode(name, x, y);
+    node.image = Q.Graphs.server;
+    return node;
+}
+
+function createNodeLinkToBus(bus, x, y, angle){
+    var node = graph.createNode("-" + idIndex, x, y);
+    node.image = Q.Graphs.server;
+    node.host = bus;
+    idIndex++;
+    var edge = createEdge(bus, node, angle);
+    return node;
+}
+
+function createEdge(a, b, angle){
+    var edge = graph.createEdge(a, b);
+    edge.setStyle(Q.Styles.ARROW_TO, false);
+    edge.angle = angle;
+    return edge;
+}
+
+function createBus(path){
+    var bus = new Q.Bus(null, path);
+    graph.graphModel.add(bus);
+    bus.setStyle(Q.Styles.SHAPE_STROKE, 5);
+    bus.setStyle(Q.Styles.SHAPE_FILL_COLOR, false);
+    return bus;
+}
+
+function createTerminal(name, x, y){
+    var node = graph.createNode(name, x, y);
+    node.image = Q.Shapes.getShape(Q.Consts.SHAPE_RECT, 30, 15);
+    node.setStyle(Q.Styles.SHAPE_FILL_COLOR, "#888");
+    return node;
+}
+var qunee = graph.createNode("Qunee", 100, 50);
+var server1 = "100.1.100.1"
+var server2 = "100.1.100.2"
+var server3 = "100.1.100.3"
+var server = createServerNode("server",100,200)
+
+
+
+</script>
+</body>
+</html>
