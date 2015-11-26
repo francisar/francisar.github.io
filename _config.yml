@@ -64,11 +64,12 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: landscape
+theme: TKL
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: git@github.com:francisar/francisar.github.io.git
-  branch: master
+  repo:
+    github: git@github.com:francisar/francisar.github.io.git,master
+    #gitcafe: git@gitcafe.com:francisar/francisar.git,gitcafe-pages

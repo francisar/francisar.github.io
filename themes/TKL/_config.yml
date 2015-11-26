@@ -37,11 +37,9 @@ weibo: http://weibo.com/u/2465175025/home
 #about  timeline
 timeline:
 - num: 1
-  word: 2014/06/12-Start
+  word: 2015/11/21-DDD
 - num: 2
-  word: 2014/11/29-XXX
-- num: 3
-  word: 2015/02/18-DDD
+  word: 2014/11/26-XXX
 - num: 4
   word: More
 widgets: 
