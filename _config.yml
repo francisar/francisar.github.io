@@ -7,9 +7,9 @@ title: francisar's Blog
 subtitle:
 description:
 author: franciscui
-language:zh-Hans
+language: zh-Hans
 email: cpf38267308@gmail.com
-timezone:
+timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
