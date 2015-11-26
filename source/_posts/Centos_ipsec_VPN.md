@@ -18,7 +18,7 @@ tag: VPN IPsec 网络 GRE
 
 
 <div style="height: 500px;" id="canvas"/>
-<script src="/blogjs/qunee-min.js"></script>
+<script src="/blogjs/qunee-module.js"></script>
 <script>
     var graph = new Q.Graph('canvas');
 
