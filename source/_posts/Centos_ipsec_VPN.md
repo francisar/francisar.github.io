@@ -6,7 +6,7 @@ tag: VPN IPsec 网络 GRE
 
 ## 写在前面的话
 在现今多种多样的需求以及复杂的网络环境下，VPN的使用场景越来越多，不同类型的vpn用于不同的场景，例如，ssl，l2tp,pptp，openvpn这种vpn主要用于翻墙，企业远程办公等场景；ipsec vpn或者gre over ipsec vpn被用于企业多办公地点的内网打通；
-在云计算火热的今天，vpn的隧道技术亦被应用于云计算基础网络架构之中，公有云的浮动IP，VPC SDN网络的建设，无不是利用vpn隧道来屏蔽底层交换机，机架的物理位置带来的限制
+在云计算火热的今天，vpn的隧道技术亦被应用于云计算基础网络架构之中，公有云的浮动IP，VPC SDN网络的建设，无不是利用vpn隧道来屏蔽底层交换机，机架的物理位置带来的限制。
 
 
 ## 背景
@@ -18,8 +18,8 @@ tag: VPN IPsec 网络 GRE
 
 
 <div style="height: 500px;" id="canvas"/>
-<script src="/blogjs/qunee-module.js"></script>
-<script>
+
+<script type="text/javascript" >
     var graph = new Q.Graph('canvas');
 
     var hello = graph.createNode("Hello", -100, -50);
