@@ -1,0 +1,25 @@
+title:  "Centos7 IPsec VPN配置"
+date:   2015/11/21 21:33
+categories: VPN 网络 IPsec
+---
+
+
+
+<div style="height: 500px;" id="canvas"/>
+<script src="blogjs/qunee-min.js"></script>
+<script>
+    var graph = new Q.Graph('canvas');
+
+    var hello = graph.createNode("Hello", -100, -50);
+    hello.image = Q.Graphs.server;
+    var qunee = graph.createNode("Qunee", 100, 50);
+    var edge = graph.createEdge("Hello\nQunee", hello, qunee);
+    edge.setStyle(Q.Styles.LABEL_OFFSET_Y, -10);
+    edge.setStyle(Q.Styles.LABEL_POSITION, Q.Position.CENTER_TOP);
+    edge.setStyle(Q.Styles.LABEL_ANCHOR_POSITION, Q.Position.CENTER_BOTTOM);
+    edge.setStyle(Q.Styles.LABEL_BORDER, 1);
+    edge.setStyle(Q.Styles.LABEL_POINTER, true);
+    edge.setStyle(Q.Styles.LABEL_PADDING, new Q.Insets(2, 5));
+    edge.setStyle(Q.Styles.LABEL_BACKGROUND_GRADIENT,
+            Q.Gradient.LINEAR_GRADIENT_VERTICAL);
+</script>
