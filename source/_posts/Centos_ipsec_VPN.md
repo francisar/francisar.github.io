@@ -21,6 +21,8 @@ tag: VPN IPsec 网络 GRE
 <div style="height: 500px;" id="canvas"/>
 
 <script>
+graph.zoomOut(0,0);
+graph.zoomOut(0,0);
 function createSubGroup(name,x, y,network, renderColor){
     var group = createGroup();
     group.name = name;
