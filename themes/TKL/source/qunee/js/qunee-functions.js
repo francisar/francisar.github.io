@@ -1,5 +1,5 @@
 var graph = new Q.Graph(canvas);
-//graph.zoomToOverview();
+graph.zoomToOverview();
 graph.moveToCenter(0.8);
 var imagepath = "/qunee/images/"
 
