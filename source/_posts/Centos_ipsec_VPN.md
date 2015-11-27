@@ -56,9 +56,9 @@ graph.styles[Q.Styles.LABEL_FONT_SIZE] = 16;
 
 
 //var qunee = createCVMNode("Qunee", 100, 50);
-var ip1 = "WanIp:100.1.100.1 \n LanIP:10.1.10.1";
-var ip2 = "WanIp:100.1.100.2 \n LanIP:10.1.10.2";
-var ip3 = "WanIp:100.1.100.3 \n LanIP:10.1.10.3";
+var ip1 = "Database \n WanIp:100.1.100.1 \n LanIP:10.1.10.1";
+var ip2 = "WebServer \n WanIp:100.1.100.2 \n LanIP:10.1.10.2";
+var ip3 = "GateWay \n WanIp:100.1.100.3 \n LanIP:10.1.10.3";
 var cloud_server1 = createServerNode(ip1,140,0,cloud_group);
 var cloud_server2 = createServerNode(ip2,340,0,cloud_group);
 var cloud_server3 = createServerNode(ip3,340,200,cloud_group);
@@ -94,3 +94,9 @@ createEdge("IPsec",sub2, cloud_server3, "#F80", true).uiClass = VPNFlexEdgeUI;
 createEdge("OPENVPN \n 172.16.1.0/24",remote, cloud_server3, "#F80", true).uiClass = VPNFlexEdgeUI;
 </script>
 
+|      位置     |    设备   |     公网IP     |  内网IP/网段  |   VIP/网段   |
+|:-------------:|:---------:|:--------------:|:-------------:|:------------:|
+|     公有云    |  GateWay  |   100.1.100.3  |    10.1.10.3  |172.16.1.1    |
+|   北京办公区  |  Router   |       随机     | 192.168.2.0/24|              |
+|   天津办公区  |  Router   |       随机     | 192.168.3.0/24|              |
+|   远程办公    |    PC     |       随机     |      随机     |172.16.0.1/24 |
