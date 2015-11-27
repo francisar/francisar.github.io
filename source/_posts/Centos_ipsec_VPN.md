@@ -19,7 +19,8 @@ tag: VPN IPsec 网络 GRE
 简易拓扑图如下
 
 <div style="height: 500px;" id="canvas"/>
-
+<script type="text/javascript" src="<%- config.root %>qunee/js/graphs.js"></script>
+<script type="text/javascript" src="<%- config.root %>qunee/js/qunee-functions.js"></script>
 <script type="text/javascript" >
 function createSubGroup(name,x, y,network, renderColor){
     var group = createGroup();
