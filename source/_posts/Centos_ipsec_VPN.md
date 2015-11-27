@@ -15,12 +15,13 @@ tag: VPN IPsec 网络 GRE
 
 创业企业由于资金问题，在创业初期办公环境不会使用商用网络，而是使用相对便宜的民用网络,所以一旦出现多个办公地点，没有办法直接建立vpn，需要通过公有云服务器打通多个办公地点的内网，同时通过公有云服务器，为远程办公的人员提供接入点
 
-## 拓扑图
+## 正文
 简易拓扑图如下
 
 <div style="height: 500px;" id="canvas"/>
-
 <script>
+var graph = new Q.Graph(canvas);
+graph.moveToCenter(0);
 graph.zoomOut(0,0);
 graph.zoomOut(0,0);
 function createSubGroup(name,x, y,network, renderColor){
@@ -92,3 +93,4 @@ createEdge("IPsec",sub1, cloud_server3, "#F80", true).uiClass = VPNFlexEdgeUI;
 createEdge("IPsec",sub2, cloud_server3, "#F80", true).uiClass = VPNFlexEdgeUI;
 createEdge("OPENVPN \n 172.16.1.0/24",remote, cloud_server3, "#F80", true).uiClass = VPNFlexEdgeUI;
 </script>
+

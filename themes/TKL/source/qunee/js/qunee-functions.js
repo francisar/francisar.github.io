@@ -1,5 +1,4 @@
-var graph = new Q.Graph(canvas);
-graph.moveToCenter(0);
+
 var imagepath = "/qunee/images/"
 
 var Colors = {
