@@ -240,28 +240,21 @@ var _hmt = _hmt || [];
         <div class="col-md-8 col-md-offset-2">
       		<p>上篇博客中，介绍了下网络拓扑的规划和设计，现在，着重介绍下CentOS与H3C路由器的ipsecVPN的配置，CentOS使用的软件包是openswan，由于办公网络使用的是民用网，出口IP不固定，因此采用ike野蛮模式进行协商</p>
 <h2 id="IPsec介绍">IPsec介绍</h2><p>IPsec 协议工作在OSI 模型的第三层，使其在单独使用时适于保护基于TCP或UDP的协议（如 安全套接子层（SSL）就不能保护UDP层的通信流）。这就意味着，与传输层或更高层的协议相比，IPsec协议必须处理可靠性和分片的问题，这同时也增加了它的复杂性和处理开销。它有两种安全协议，分别是AH和ESP，AH主要提供身份验证和数据完整性验证，ESP则提供身份验证，数据完整性验证以及加密功能（我们选用ESP）。封装模式有传输模式和隧道模式（我们选择隧道模式）。密钥管理采用ISAKMP。详细内容可以到H3C的<br><a href="http://www.h3c.com.cn/Service/Channel_Service/Operational_Service/ICG_Technology/201005/675214_30005_0.htm" target="_blank" rel="external">IPsec原理</a>介绍帖子中查看，讲的挺详细的。</p>
-<h2 id="CentOS配置">CentOS配置</h2><ol>
-<li><p>CentOS中可以通过yum安装对应的包</p>
+<h2 id="CentOS配置">CentOS配置</h2><p>CentOS中可以通过yum安装对应的包</p>
 <!--lang:bash-->
-<p> yum install epel-release<br> yum install openswan</p>
-</li>
-<li><p>修改/添加 /etc/sysctl.conf</p>
-</li>
-</ol>
+<pre><code>yum <span class="operator"><span class="keyword">install</span> epel-<span class="keyword">release</span>
+yum <span class="keyword">install</span> openswan</span>
+</code></pre><p>修改/添加 /etc/sysctl.conf</p>
 <!--lang:bash-->
 <pre><code>net<span class="class">.ipv4</span><span class="class">.ip_forward</span> = <span class="number">1</span>
 net<span class="class">.ipv4</span><span class="class">.conf</span><span class="class">.default</span><span class="class">.accept_redirects</span> = <span class="number">0</span>
 net<span class="class">.ipv4</span><span class="class">.conf</span><span class="class">.default</span><span class="class">.send_redirects</span> = <span class="number">0</span>
 net<span class="class">.ipv4</span><span class="class">.conf</span><span class="class">.eth0</span><span class="class">.rp_filter</span> = <span class="number">0</span>
 net<span class="class">.ipv4</span><span class="class">.conf</span><span class="class">.default</span><span class="class">.rp_filter</span> = <span class="number">0</span>
-</code></pre><ol>
-<li>然后将上述配置生效</li>
-</ol>
+</code></pre><p>然后将上述配置生效</p>
 <!--lang:bash-->
 <pre><code><span class="title">sysctl</span> -p
-</code></pre><ol>
-<li>修改/添加ipsec配置文件/etc/ipsec.conf</li>
-</ol>
+</code></pre><p>修改/添加ipsec配置文件/etc/ipsec.conf</p>
 <!--lang:bash-->
 <pre><code>config setup
     protostack=netkey
@@ -391,9 +384,7 @@ Checking 'ip'<span class="symbol"> command</span>                               
 Checking</span> 'iptables'<span class="symbol"> command</span>                           [OK]<span class="symbol">
 Checking</span> 'prelink'<span class="symbol"> command</span> does<span class="symbol"> not</span> interfere<span class="symbol"> with</span> FIPSChecking<span class="symbol"> for</span> obsolete<span class="symbol"> ipsec.conf</span> options              [OK]<span class="symbol">
 Opportunistic</span> Encryption                              [DISABLED]
-</code></pre><ol>
-<li>H3C路由器配置<br>北京分部路由器<br>配置ike proposal</li>
-</ol>
+</code></pre><h2 id="H3C路由器配置">H3C路由器配置</h2><p>北京分部路由器<br>配置ike proposal</p>
 <!--lang:bash-->
 <pre><code>ike proposal <span class="number">1</span>
 encryption-algorithm aes-cbc <span class="number">128</span>
