@@ -260,114 +260,117 @@ net<span class="class">.ipv4</span><span class="class">.conf</span><span class="
 <!--lang:bash-->
 <pre><code><span class="title">sysctl</span> -p
 </code></pre><ol>
-<li><p>修改/添加ipsec配置文件/etc/ipsec.conf</p>
+<li>修改/添加ipsec配置文件/etc/ipsec.conf</li>
+</ol>
 <!--lang:bash-->
-<p> config setup</p>
-<pre><code>protostack=netkey
-listen=<span class="number">100.1</span><span class="number">.100</span><span class="number">.3</span>
-plutodebug=none
-plutostderrlog=/data/ipsec/<span class="built_in">log</span>/pluto.<span class="built_in">log</span>
-dumpdir=/data/ipsec/pluto/
-nat_traversal=yes
-virtual_private=%v4:<span class="number">10.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">8</span>,%v4:<span class="number">192.168</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">16</span>,%v4:<span class="number">172.16</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">12</span>
-include /etc/ipsec.d<span class="comment">/*.conf</span>
-</code></pre></li>
-<li><p>添加各分部配置文件（在/etc/ipsec.d/下）<br>公有云到北京分部cloud_to_bj.conf</p>
+<pre><code>config setup
+    protostack=netkey
+    listen=<span class="number">100.1</span><span class="number">.100</span><span class="number">.3</span>
+    plutodebug=none
+    plutostderrlog=/data/ipsec/<span class="built_in">log</span>/pluto.<span class="built_in">log</span>
+    dumpdir=/data/ipsec/pluto/
+    nat_traversal=yes
+    virtual_private=%v4:<span class="number">10.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">8</span>,%v4:<span class="number">192.168</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">16</span>,%v4:<span class="number">172.16</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">12</span>
+    include /etc/ipsec.d<span class="comment">/*.conf</span>
+</code></pre><ol>
+<li>添加各分部配置文件（在/etc/ipsec.d/下）<br>公有云到北京分部cloud_to_bj.conf</li>
+</ol>
 <!--lang:bash-->
-<p> conn    cloud_to_bj_net</p>
-<pre><code><span class="setting">connaddrfamily=<span class="value">ipv4</span></span>
-<span class="setting">aggrmode=<span class="value"><span class="keyword">yes</span></span></span>
-<span class="setting">authby=<span class="value">secret</span></span>
-<span class="setting">auto=<span class="value">start</span></span>
-<span class="setting">ike=<span class="value">aes128-sha1;modp1024</span></span>
-<span class="comment">## phase 1 ##</span>
-<span class="setting">keyexchange=<span class="value">ike</span></span>
-<span class="comment">## phase 2 ##</span>
-<span class="setting">phase2=<span class="value">esp</span></span>
-<span class="setting">phase2alg=<span class="value">aes128-sha1;modp1024</span></span>
-<span class="setting">compress=<span class="value"><span class="keyword">no</span></span></span>
-<span class="setting">pfs=<span class="value"><span class="keyword">yes</span></span></span>
-<span class="setting">type=<span class="value">tunnel</span></span>
-<span class="setting">left=<span class="value"><span class="number">100.1</span>.<span class="number">100.3</span></span></span>
-<span class="setting">leftsubnet=<span class="value"><span class="number">172.16</span>.<span class="number">0.0</span>/<span class="number">16</span></span></span>
-<span class="setting">leftid=<span class="value">@cloud.cloud.com</span></span>
-<span class="setting">right=<span class="value">%any</span></span>
-<span class="setting">rightsubnet=<span class="value"><span class="number">192.168</span>.<span class="number">2.0</span>/<span class="number">24</span></span></span>
-<span class="setting">rightid=<span class="value">@bj.bj.com</span></span>
+<pre><code>conn    cloud_to_bj_net
+    connaddrfamily=ipv4
+    aggrmode=yes
+    authby=secret
+    <span class="keyword">auto</span>=start
+    ike=aes128-sha1;modp1024
+    <span class="preprocessor">## phase <span class="number">1</span> ##</span>
+    keyexchange=ike
+    <span class="preprocessor">## phase <span class="number">2</span> ##</span>
+    phase2=esp
+    phase2alg=aes128-sha1;modp1024
+    compress=no
+    pfs=yes
+    type=tunnel
+    left=<span class="number">100.1</span><span class="number">.100</span><span class="number">.3</span>
+    leftsubnet=<span class="number">172.16</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">16</span>
+    leftid=@cloud.cloud.com
+    right=%any
+    rightsubnet=<span class="number">192.168</span><span class="number">.2</span><span class="number">.0</span>/<span class="number">24</span>
+    rightid=@bj.bj.com
 </code></pre><p>公有云到天津分部cloud_to_tj.conf</p>
 <!--lang:bash-->
-<p> conn    cloud_to_bj_net</p>
-<pre><code><span class="setting">connaddrfamily=<span class="value">ipv4</span></span>
-<span class="setting">aggrmode=<span class="value"><span class="keyword">yes</span></span></span>
-<span class="setting">authby=<span class="value">secret</span></span>
-<span class="setting">auto=<span class="value">start</span></span>
-<span class="setting">ike=<span class="value">aes128-sha1;modp1024</span></span>
-<span class="comment">## phase 1 ##</span>
-<span class="setting">keyexchange=<span class="value">ike</span></span>
-<span class="comment">## phase 2 ##</span>
-<span class="setting">phase2=<span class="value">esp</span></span>
-<span class="setting">phase2alg=<span class="value">aes128-sha1;modp1024</span></span>
-<span class="setting">compress=<span class="value"><span class="keyword">no</span></span></span>
-<span class="setting">pfs=<span class="value"><span class="keyword">yes</span></span></span>
-<span class="setting">type=<span class="value">tunnel</span></span>
-<span class="setting">left=<span class="value"><span class="number">100.1</span>.<span class="number">100.3</span></span></span>
-<span class="setting">leftsubnet=<span class="value"><span class="number">172.16</span>.<span class="number">0.0</span>/<span class="number">16</span></span></span>
-<span class="setting">leftid=<span class="value">@cloud2.cloud.com</span></span>
-<span class="setting">right=<span class="value">%any</span></span>
-<span class="setting">rightsubnet=<span class="value"><span class="number">192.168</span>.<span class="number">3.0</span>/<span class="number">24</span></span></span>
-<span class="setting">rightid=<span class="value">@tj.tj.com</span></span>
-</code></pre><p>北京分部到天津分部bj_to_tj.conf</p>
-<!--lang:bash-->
-<p> conn   bj_to_tj_net</p>
-<pre><code><span class="setting">connaddrfamily=<span class="value">ipv4</span></span>
-<span class="setting">aggrmode=<span class="value"><span class="keyword">yes</span></span></span>
-<span class="setting">authby=<span class="value">secret</span></span>
-<span class="setting">auto=<span class="value">start</span></span>
-<span class="setting">ike=<span class="value">aes128-sha1;modp1024</span></span>
-<span class="comment">## phase 1 ##</span>
-<span class="setting">keyexchange=<span class="value">ike</span></span>
-<span class="comment">## phase 2 ##</span>
-<span class="setting">phase2=<span class="value">esp</span></span>
-<span class="setting">phase2alg=<span class="value">aes128-sha1;modp1024</span></span>
-<span class="setting">compress=<span class="value"><span class="keyword">no</span></span></span>
-<span class="setting">pfs=<span class="value"><span class="keyword">yes</span></span></span>
-<span class="setting">type=<span class="value">tunnel</span></span>
-<span class="setting">left=<span class="value"><span class="number">100.1</span>.<span class="number">100.3</span></span></span>
-<span class="setting">leftsubnet=<span class="value"><span class="number">192.168</span>.<span class="number">2.0</span>/<span class="number">24</span></span></span>
-<span class="setting">leftid=<span class="value">@cloud1.cloud.com</span></span>
-<span class="setting">right=<span class="value">%any</span></span>
-<span class="setting">rightsubnet=<span class="value"><span class="number">192.168</span>.<span class="number">3.0</span>/<span class="number">24</span></span></span>
-<span class="setting">rightid=<span class="value">@tj1.tj.com</span></span>
+<pre><code>conn    cloud_to_bj_net
+    connaddrfamily=ipv4
+    aggrmode=yes
+    authby=secret
+    <span class="keyword">auto</span>=start
+    ike=aes128-sha1;modp1024
+    <span class="preprocessor">## phase <span class="number">1</span> ##</span>
+    keyexchange=ike
+    <span class="preprocessor">## phase <span class="number">2</span> ##</span>
+    phase2=esp
+    phase2alg=aes128-sha1;modp1024
+    compress=no
+    pfs=yes
+    type=tunnel
+    left=<span class="number">100.1</span><span class="number">.100</span><span class="number">.3</span>
+    leftsubnet=<span class="number">172.16</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">16</span>
+    leftid=@cloud2.cloud.com
+    right=%any
+    rightsubnet=<span class="number">192.168</span><span class="number">.3</span><span class="number">.0</span>/<span class="number">24</span>
+    rightid=@tj.tj.com
+</code></pre><p>北京分部到天津分部bj_to_tj.conf<br><!--lang:bash--></p>
+<pre><code>conn   bj_to_tj_net
+    connaddrfamily=ipv4
+    aggrmode=yes
+    authby=secret
+    <span class="keyword">auto</span>=start
+    ike=aes128-sha1;modp1024
+    <span class="preprocessor">## phase <span class="number">1</span> ##</span>
+    keyexchange=ike
+    <span class="preprocessor">## phase <span class="number">2</span> ##</span>
+    phase2=esp
+    phase2alg=aes128-sha1;modp1024
+    compress=no
+    pfs=yes
+    type=tunnel
+    left=<span class="number">100.1</span><span class="number">.100</span><span class="number">.3</span>
+    leftsubnet=<span class="number">192.168</span><span class="number">.2</span><span class="number">.0</span>/<span class="number">24</span>
+    leftid=@cloud1.cloud.com
+    right=%any
+    rightsubnet=<span class="number">192.168</span><span class="number">.3</span><span class="number">.0</span>/<span class="number">24</span>
+    rightid=@tj1.tj.com
 </code></pre><p>天津分部到北京分部tj_to_bj.conf</p>
 <!--lang:bash-->
-<p> conn   tj_to_bj_net<br> connaddrfamily=ipv4<br> aggrmode=yes</p>
-<pre><code><span class="setting">authby=<span class="value">secret</span></span>
-<span class="setting">auto=<span class="value">start</span></span>
-<span class="setting">ike=<span class="value">aes128-sha1;modp1024</span></span>
+<pre><code>conn   tj_to_bj_net
+<span class="constant">connaddrfamily</span>=ipv4
+<span class="constant">aggrmode</span>=yes
+<span class="constant">authby</span>=secret
+<span class="constant">auto</span>=start
+<span class="constant">ike</span>=aes128-sha1;modp1024
 <span class="comment">## phase 1 ##</span>
-<span class="setting">keyexchange=<span class="value">ike</span></span>
+<span class="constant">keyexchange</span>=ike
 <span class="comment">## phase 2 ##</span>
-<span class="setting">phase2=<span class="value">esp</span></span>
-<span class="setting">phase2alg=<span class="value">aes128-sha1;modp1024</span></span>
-<span class="setting">compress=<span class="value"><span class="keyword">no</span></span></span>
-<span class="setting">pfs=<span class="value"><span class="keyword">yes</span></span></span>
-<span class="setting">type=<span class="value">tunnel</span></span>
-<span class="setting">left=<span class="value"><span class="number">100.1</span>.<span class="number">100.3</span></span></span>
-<span class="setting">leftsubnet=<span class="value"><span class="number">192.168</span>.<span class="number">3.0</span>/<span class="number">24</span></span></span>
-<span class="setting">leftid=<span class="value">@cloud3.cloud.com</span></span>
-<span class="setting">right=<span class="value">%any</span></span>
-<span class="setting">rightsubnet=<span class="value"><span class="number">192.168</span>.<span class="number">2.0</span>/<span class="number">24</span></span></span>
-<span class="setting">rightid=<span class="value">@bj1.bj.com</span></span>
+<span class="constant">phase2</span>=esp
+<span class="constant">phase2alg</span>=aes128-sha1;modp1024
+<span class="constant">compress</span>=no
+<span class="constant">pfs</span>=yes
+<span class="constant">type</span>=tunnel
+<span class="constant">left</span>=100.1.100.3
+<span class="constant">leftsubnet</span>=192.168.3.0/24
+<span class="constant">leftid</span>=@cloud3.cloud.com
+<span class="constant">right</span>=%any
+<span class="constant">rightsubnet</span>=192.168.2.0/24
+<span class="constant">rightid</span>=@bj1.bj.com
 </code></pre><p>设置预共享密钥，在/etc/ipsec.d/下创建cloud.secrets,添加如下内容</p>
 <!--lang:bash-->
-<p> 100.1.100.3   %any:   PSK “123456” </p>
-</li>
-</ol>
-<p><font color="red">注：123456为预共享密钥，正式设置时一定要修改成一个安全的值</font><br>启动以及验证ipsec服务<br><!--lang:bash--></p>
+<pre><code><span class="number">100.1</span><span class="number">.100</span><span class="number">.3</span>   %any:   PSK <span class="string">"123456"</span> 
+</code></pre><p><font color="red">注：123456为预共享密钥，正式设置时一定要修改成一个安全的值</font><br>启动以及验证ipsec服务</p>
+<!--lang:bash-->
 <pre><code>service ipsec <span class="built_in">start</span>
 chkconfig ipsec <span class="command"><span class="keyword">on</span></span>
 ipsec verify
-</code></pre><p>结果如下即可<br><!--lang:bash--></p>
+</code></pre><p>结果如下即可</p>
+<!--lang:bash-->
 <pre><code>erifying installed system and configuration files
 Version check and ipsec on-path                       [OK]
 Libreswan <span class="number">3.8</span> (netkey) on <span class="number">3.10</span><span class="number">.0</span>-<span class="number">123.9</span><span class="number">.3</span>.el7.x86_64
@@ -435,14 +438,16 @@ security acl <span class="number">3001</span>
 pfs dh-group2
 ike-peer bj_cloud
 transform-<span class="built_in">set</span> bj
-</code></pre><p>配置感兴趣流<br><!--lang:bash--></p>
+</code></pre><p>配置感兴趣流</p>
+<!--lang:bash-->
 <pre><code>acl number <span class="number">3000</span>
 rule <span class="number">0</span> permit ip source <span class="number">192.168</span><span class="number">.2</span><span class="number">.0</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.255</span> destination <span class="number">172.16</span><span class="number">.0</span><span class="number">.0</span> <span class="number">0.0</span><span class="number">.255</span><span class="number">.255</span>
 rule <span class="number">20</span> deny ip
 acl number <span class="number">3001</span>
 rule <span class="number">0</span> permit ip source <span class="number">192.168</span><span class="number">.2</span><span class="number">.0</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.255</span> destination <span class="number">192.168</span><span class="number">.3</span><span class="number">.0</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.255</span>
 rule <span class="number">20</span> deny ip
-</code></pre><p>在接口上启用ipsec<br><!--lang:bash--></p>
+</code></pre><p>在接口上启用ipsec</p>
+<!--lang:bash-->
 <pre><code><span class="class"><span class="keyword">interface</span> <span class="title">Dialup</span> 1</span>
 ipsec policy bj
 </code></pre>
