@@ -39,6 +39,7 @@ IPsec 协议工作在OSI 模型的第三层，使其在单独使用时适于保�
 
 
 4. 修改/添加ipsec配置文件/etc/ipsec.conf
+
 <!--lang:bash-->
 
     config setup
@@ -50,8 +51,9 @@ IPsec 协议工作在OSI 模型的第三层，使其在单独使用时适于保�
 	    nat_traversal=yes
 	    virtual_private=%v4:10.0.0.0/8,%v4:192.168.0.0/16,%v4:172.16.0.0/12
         include /etc/ipsec.d/*.conf
-4. 添加各分部配置文件（在/etc/ipsec.d/下）
+5. 添加各分部配置文件（在/etc/ipsec.d/下）
 公有云到北京分部cloud_to_bj.conf
+
 <!--lang:bash-->
 
     conn    cloud_to_bj_net
@@ -75,6 +77,7 @@ IPsec 协议工作在OSI 模型的第三层，使其在单独使用时适于保�
         rightsubnet=192.168.2.0/24
         rightid=@bj.bj.com
 公有云到天津分部cloud_to_tj.conf
+
 <!--lang:bash-->
 
     conn    cloud_to_bj_net
@@ -121,35 +124,38 @@ IPsec 协议工作在OSI 模型的第三层，使其在单独使用时适于保�
         rightsubnet=192.168.3.0/24
         rightid=@tj1.tj.com
 天津分部到北京分部tj_to_bj.conf
+
 <!--lang:bash-->
 
     conn   tj_to_bj_net
     connaddrfamily=ipv4
     aggrmode=yes
-        authby=secret
-        auto=start
-        ike=aes128-sha1;modp1024
-        ## phase 1 ##
-        keyexchange=ike
-        ## phase 2 ##
-        phase2=esp
-        phase2alg=aes128-sha1;modp1024
-        compress=no
-        pfs=yes
-        type=tunnel
-        left=100.1.100.3
-        leftsubnet=192.168.3.0/24
-        leftid=@cloud3.cloud.com
-        right=%any
-        rightsubnet=192.168.2.0/24
-        rightid=@bj1.bj.com
+    authby=secret
+    auto=start
+    ike=aes128-sha1;modp1024
+    ## phase 1 ##
+    keyexchange=ike
+    ## phase 2 ##
+    phase2=esp
+    phase2alg=aes128-sha1;modp1024
+    compress=no
+    pfs=yes
+    type=tunnel
+    left=100.1.100.3
+    leftsubnet=192.168.3.0/24
+    leftid=@cloud3.cloud.com
+    right=%any
+    rightsubnet=192.168.2.0/24
+    rightid=@bj1.bj.com
 设置预共享密钥，在/etc/ipsec.d/下创建cloud.secrets,添加如下内容
+
 <!--lang:bash-->
 
     100.1.100.3   %any:   PSK "123456" 
     
 <font color=red>注：123456为预共享密钥，正式设置时一定要修改成一个安全的值</font>
 启动以及验证ipsec服务
+
 <!--lang:bash-->
 
     service ipsec start
@@ -157,6 +163,7 @@ IPsec 协议工作在OSI 模型的第三层，使其在单独使用时适于保�
     ipsec verify
     
 结果如下即可
+
 <!--lang:bash-->
 
     erifying installed system and configuration files
@@ -180,7 +187,7 @@ IPsec 协议工作在OSI 模型的第三层，使其在单独使用时适于保�
     Checking 'prelink' command does not interfere with FIPSChecking for obsolete ipsec.conf options              [OK]
     Opportunistic Encryption                              [DISABLED]
 
-5. H3C路由器配置
+6. H3C路由器配置
 北京分部路由器
 配置ike proposal
 
@@ -237,6 +244,7 @@ IPsec 协议工作在OSI 模型的第三层，使其在单独使用时适于保�
     transform-set bj
 
 配置感兴趣流
+
 <!--lang:bash-->
     
     acl number 3000
@@ -247,6 +255,7 @@ IPsec 协议工作在OSI 模型的第三层，使其在单独使用时适于保�
     rule 20 deny ip
     
 在接口上启用ipsec
+
 <!--lang:bash-->
 
     interface Dialup 1
