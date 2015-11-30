@@ -15,13 +15,14 @@ IPsec 协议工作在OSI 模型的第三层，使其在单独使用时适于保�
 
 ## CentOS配置
 
-1.CentOS中可以通过yum安装对应的包
+1. CentOS中可以通过yum安装对应的包
 <!--lang:bash-->
 
     yum install epel-release
     yum install openswan
 
 2. 修改/添加 /etc/sysctl.conf
+
 <!--lang:bash-->
 
     net.ipv4.ip_forward = 1
@@ -31,12 +32,13 @@ IPsec 协议工作在OSI 模型的第三层，使其在单独使用时适于保�
     net.ipv4.conf.default.rp_filter = 0
     
 3. 然后将上述配置生效
+
 <!--lang:bash-->
 
     sysctl -p
 
 
-4.1. 修改/添加ipsec配置文件/etc/ipsec.conf
+4. 修改/添加ipsec配置文件/etc/ipsec.conf
 <!--lang:bash-->
 
     config setup
@@ -48,7 +50,7 @@ IPsec 协议工作在OSI 模型的第三层，使其在单独使用时适于保�
 	    nat_traversal=yes
 	    virtual_private=%v4:10.0.0.0/8,%v4:192.168.0.0/16,%v4:172.16.0.0/12
         include /etc/ipsec.d/*.conf
-4.2. 添加各分部配置文件（在/etc/ipsec.d/下）
+4. 添加各分部配置文件（在/etc/ipsec.d/下）
 公有云到北京分部cloud_to_bj.conf
 <!--lang:bash-->
 
@@ -147,7 +149,7 @@ IPsec 协议工作在OSI 模型的第三层，使其在单独使用时适于保�
     100.1.100.3   %any:   PSK "123456" 
     
 <font color=red>注：123456为预共享密钥，正式设置时一定要修改成一个安全的值</font>
-4.3. 启动以及验证ipsec服务
+启动以及验证ipsec服务
 <!--lang:bash-->
 
     service ipsec start
@@ -181,12 +183,14 @@ IPsec 协议工作在OSI 模型的第三层，使其在单独使用时适于保�
 5. H3C路由器配置
 北京分部路由器
 配置ike proposal
+
 <!--lang:bash-->
 
     ike proposal 1
     encryption-algorithm aes-cbc 128
     dh group2
 配置ikepeer
+
 <!--lang:bash-->
 
     ike peer bj_cloud
@@ -209,6 +213,7 @@ IPsec 协议工作在OSI 模型的第三层，使其在单独使用时适于保�
     local-name bj1.bj.com
     nat traversal
 配置ipsec transform-set
+
 <!--lang:bash-->
 
     ipsec transform-set bj
@@ -217,6 +222,7 @@ IPsec 协议工作在OSI 模型的第三层，使其在单独使用时适于保�
     esp authentication-algorithm sha1
     esp encryption-algorithm aes-cbc-128
 配置ipsec policy
+
 <!--lang:bash-->
 
     ipsec policy bj 1 isakmp
