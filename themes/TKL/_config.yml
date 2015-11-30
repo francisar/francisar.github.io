@@ -23,7 +23,7 @@ baidu_analytics: true
 #  works_url: /atom.xml
 
 #duoshuo name
-#duoshuo: duoshuo_name
+duoshuo: franciscui
 
 # Miscellaneous
 github: https://github.com/francisar
@@ -44,6 +44,11 @@ timeline:
   word: More
 widgets: 
 - calendar
+- recent_posts
+- category
+- tag
+- tagcloud
+
 #Links
 #links:
 #- name: Kieran
