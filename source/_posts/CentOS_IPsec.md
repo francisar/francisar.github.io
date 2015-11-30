@@ -15,13 +15,14 @@ IPsec 协议工作在OSI 模型的第三层，使其在单独使用时适于保�
 
 ## CentOS配置
 
-1. CentOS中可以通过yum安装对应的包
+CentOS中可以通过yum安装对应的包
+
 <!--lang:bash-->
 
     yum install epel-release
     yum install openswan
 
-2. 修改/添加 /etc/sysctl.conf
+修改/添加 /etc/sysctl.conf
 
 <!--lang:bash-->
 
@@ -31,14 +32,14 @@ IPsec 协议工作在OSI 模型的第三层，使其在单独使用时适于保�
     net.ipv4.conf.eth0.rp_filter = 0
     net.ipv4.conf.default.rp_filter = 0
     
-3. 然后将上述配置生效
+然后将上述配置生效
 
 <!--lang:bash-->
 
     sysctl -p
 
 
-4. 修改/添加ipsec配置文件/etc/ipsec.conf
+修改/添加ipsec配置文件/etc/ipsec.conf
 
 <!--lang:bash-->
 
@@ -187,7 +188,8 @@ IPsec 协议工作在OSI 模型的第三层，使其在单独使用时适于保�
     Checking 'prelink' command does not interfere with FIPSChecking for obsolete ipsec.conf options              [OK]
     Opportunistic Encryption                              [DISABLED]
 
-6. H3C路由器配置
+## H3C路由器配置
+
 北京分部路由器
 配置ike proposal
 
