@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>francisar&#39;s Blog</title>
+  <title>基于公有云建设私有网络（三） | francisar&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -101,7 +101,7 @@ var _hmt = _hmt || [];
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -220,17 +220,12 @@ var _hmt = _hmt || [];
         <!-- // End height spacing helper -->
 
         <!-- ============================ END Hero Image =========================== -->
-      <!-- ============================ Content =========================== -->
-
+      
 <section id="intro">
     <div class="container">
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2015/12/13/CentOS_openvpn/">基于公有云建设私有网络（三）</a></h3>
-                    <span>
-                        <span class="post-meta">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
       <time datetime="2015-12-13T06:41:00.000Z" itemprop="datePublished">
           2015-12-13
       </time>
@@ -241,142 +236,81 @@ var _hmt = _hmt || [];
     
     
 </span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        接下来是openvpn的配置
-openvpn介绍OpenVpn的技术核心是虚拟网卡，其次是SSL协议实现，由于SSL协议在其它的词条中介绍的比较清楚了，这里重点对虚拟网卡及其在OpenVpn的中的工作机理进行介绍：虚拟网卡是使用网络底层编程技术实现的一个驱动软件，安装后在主机上多出现一个网卡，可以像其它网卡一样进行配置。服务程序可以在应用层打开虚拟网卡，如果应用软件（如IE）向虚拟网卡发送数据，则服务程序可以读取到该数据，如果服务程序写
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2015/12/13/CentOS_openvpn/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
+                <h1>基于公有云建设私有网络（三）</h1>
             </div>
         </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2015/11/26/Centos_ipsec_VPN/">基于公有云建设私有网络（一）</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2015-11-26T07:41:00.000Z" itemprop="datePublished">
-          2015-11-26
-      </time>
-    
-    
-    | 
-    <a href='/tags/VPN-IPsec-网络-GRE/'>VPN IPsec 网络 GRE</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        写在前面的话在现今多种多样的需求以及复杂的网络环境下，VPN的使用场景越来越多，不同类型的vpn用于不同的场景，例如，ssl，l2tp,pptp，openvpn这种vpn主要用于翻墙，企业远程办公等场景；ipsec vpn或者gre over ipsec vpn被用于企业多办公地点的内网打通；在云计算火热的今天，vpn的隧道技术亦被应用于云计算基础网络架构之中，公有云的浮动IP，VPC SDN网络的建设，无不是利用vpn隧道来屏蔽底层交
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2015/11/26/Centos_ipsec_VPN/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>接下来是openvpn的配置</p>
+<h2 id="openvpn介绍">openvpn介绍</h2><p>OpenVpn的技术核心是虚拟网卡，其次是SSL协议实现，由于SSL协议在其它的词条中介绍的比较清楚了，这里重点对虚拟网卡及其在OpenVpn的中的工作机理进行介绍：虚拟网卡是使用网络底层编程技术实现的一个驱动软件，安装后在主机上多出现一个网卡，可以像其它网卡一样进行配置。服务程序可以在应用层打开虚拟网卡，如果应用软件（如IE）向虚拟网卡发送数据，则服务程序可以读取到该数据，如果服务程序写合适的数据到虚拟网卡，应用软件也可以接收得到。虚拟网卡在很多的操作系统下都有相应的实现，这也是OpenVpn能够跨平台一个很重要的理由。</p>
+<h2 id="openvpn服务端配置">openvpn服务端配置</h2><p>安装不做赘述，主要是配置文件<br><!--lang:bash--></p>
+<pre><code>local       <span class="number">100.1</span><span class="number">.100</span><span class="number">.3</span>                                 ;服务器监听的IP地址
+port        <span class="number">1194</span>                                        ;端口
+proto       udp                                         ;协议使用udp
+dev         tun                                         ;使用tun模式（还有一种模式是tap）
+ca          /etc/openvpn/easy-rsa/<span class="number">2.0</span>/keys/ca.crt       ;ca证书
+cert        /etc/openvpn/easy-rsa/<span class="number">2.0</span>/keys/server.crt   ;服务器证书
+key         /etc/openvpn/easy-rsa/<span class="number">2.0</span>/keys/server.key   ;服务器密钥
+dh          /etc/openvpn/easy-rsa/<span class="number">2.0</span>/keys/dh2048.pem   
+server      <span class="number">172.16</span><span class="number">.1</span><span class="number">.0</span> <span class="number">255.255</span><span class="number">.255</span><span class="number">.0</span>                    ;给客户端分配的IP地址段
+push        <span class="string">"route 192.168.2.0 255.255.255.0"</span>           ;推送给客户端的路由，使远程接入的员工可以访问北京办公网
+push        <span class="string">"route 172.16.2.0 255.255.255.0"</span>            ;使远程办公员工可以访问公有云虚拟出来的网段
+push        <span class="string">"route 192.168.3.0 255.255.255.0"</span>           ;使远程接入的员工可以访问天津办公网
+push        <span class="string">"dhcp-option DNS 192.168.2.200"</span>             ;推送内部dns服务器地址为客户端dns
+<span class="built_in">log</span>         /data/<span class="built_in">log</span>/openvpn.<span class="built_in">log</span>
+keepalive   <span class="number">10</span> <span class="number">120</span>
+verb        <span class="number">3</span>
+client-to-client
+comp-lzo
+persist-key
+persist-tun
+</code></pre><h2 id="openvpn客户端">openvpn客户端</h2><p>客户端配置文件如下<br><!--lang:bash--></p>
+<pre><code>client
+proto udp
+dev tun
+remote <span class="number">100.1</span>.<span class="number">100.3</span>  <span class="number">1194</span>  
+ca ca<span class="class">.crt</span>
+cert client<span class="class">.crt</span>
+key client<span class="class">.key</span>  
+dh dh2048<span class="class">.pem</span>
+keepalive <span class="number">10</span> <span class="number">120</span>
+comp-lzo
+comp-noadapt
+user daemon
+group daemon
+persist-key
+persist-tun
+status openvpn-status<span class="class">.log</span>
+verb <span class="number">3</span>
+</code></pre>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2015/11/26/CentOS_IPsec/">基于公有云建设私有网络（二）</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2015-11-26T07:41:00.000Z" itemprop="datePublished">
-          2015-11-26
-      </time>
-    
-    
-    | 
-    <a href='/tags/VPN-IPsec-网络-GRE/'>VPN IPsec 网络 GRE</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        上篇博客中，介绍了下网络拓扑的规划和设计，现在，着重介绍下CentOS与H3C路由器的ipsecVPN的配置，CentOS使用的软件包是openswan，由于办公网络使用的是民用网，出口IP不固定，因此采用ike野蛮模式进行协商
-IPsec介绍IPsec 协议工作在OSI 模型的第三层，使其在单独使用时适于保护基于TCP或UDP的协议（如 安全套接子层（SSL）就不能保护UDP层的通信流）。这就意味着，与传输层或更高层的协议相比，IPs
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2015/11/26/CentOS_IPsec/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2015/11/21/关于博客/">关于博客</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2015-11-21T13:33:00.000Z" itemprop="datePublished">
-          2015-11-21
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        不困于过去，不安于现在，不畏于将来
-过去14年9月的时候，开始在github上折腾博客，心想着要坚持记录自己成长的点点滴滴，然而坚持到了12月份，却慢慢的由于各方面的原因（加班，夜班，社交活动，编写博客的笔记本环境系统重装），把总结自己的时间一点一点挤没了，对于新的东西，总是有很大的激情去体验，去尝试，但是由于各方面的因素，遇到的各种困难而慢慢的难以坚持下去，现在的我，已经毕业两年了，两年里基本是被工作压迫着成长，不断的接触着新的东西，
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2015/11/21/关于博客/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
         <nav class="pagination" role="pagination">
-          
-          
-        </nav>
+    
+    
+    <a class="pull-right" href="/2015/11/26/Centos_ipsec_VPN/">
+        基于公有云建设私有网络（一） →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="2015/12/13/CentOS_openvpn/" data-title="基于公有云建设私有网络（三）" data-url="http://blog.franciscui.cn/2015/12/13/CentOS_openvpn/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"franciscui"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>成长之美</p>
-        </div>
-    </div>
-</section>
-<!-- ============================ END Content =========================== -->
+
 
       
 <!-- ============================ Footer =========================== -->
