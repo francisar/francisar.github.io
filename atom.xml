@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.franciscui.cn/"/>
-  <updated>2015-12-13T07:22:23.814Z</updated>
+  <updated>2015-12-13T07:27:59.554Z</updated>
   <id>http://blog.franciscui.cn/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.franciscui.cn/2015/12/13/CentOS_openvpn/"/>
     <id>http://blog.franciscui.cn/2015/12/13/CentOS_openvpn/</id>
     <published>2015-12-13T06:41:00.000Z</published>
-    <updated>2015-12-13T07:22:23.814Z</updated>
+    <updated>2015-12-13T07:27:59.554Z</updated>
     <content type="html"><![CDATA[<p>接下来是openvpn的配置</p>
 <h2 id="openvpn介绍">openvpn介绍</h2><p>OpenVpn的技术核心是虚拟网卡，其次是SSL协议实现，由于SSL协议在其它的词条中介绍的比较清楚了，这里重点对虚拟网卡及其在OpenVpn的中的工作机理进行介绍：虚拟网卡是使用网络底层编程技术实现的一个驱动软件，安装后在主机上多出现一个网卡，可以像其它网卡一样进行配置。服务程序可以在应用层打开虚拟网卡，如果应用软件（如IE）向虚拟网卡发送数据，则服务程序可以读取到该数据，如果服务程序写合适的数据到虚拟网卡，应用软件也可以接收得到。虚拟网卡在很多的操作系统下都有相应的实现，这也是OpenVpn能够跨平台一个很重要的理由。</p>
 <h2 id="openvpn服务端配置">openvpn服务端配置</h2><p>安装不做赘述，主要是配置文件<br><!--lang:bash--></p>
@@ -61,6 +61,7 @@ persist-key
 persist-tun
 status openvpn-status<span class="class">.log</span>
 verb <span class="number">3</span>
+</code></pre><h2 id="结束">结束</h2><pre><code>至此，一个简单的多地域办公+远程办公的网络环境建立完成
 </code></pre>]]></content>
     <summary type="html">
     <![CDATA[<p>接下来是openvpn的配置</p>
@@ -234,7 +235,7 @@ createEdge("OPENVPN \n 172.16.1.0/24",remote, cloud_server3, "#F80", true).uiCla
     <link href="http://blog.franciscui.cn/2015/11/26/CentOS_IPsec/"/>
     <id>http://blog.franciscui.cn/2015/11/26/CentOS_IPsec/</id>
     <published>2015-11-26T07:41:00.000Z</published>
-    <updated>2015-11-30T16:54:20.454Z</updated>
+    <updated>2015-12-13T07:35:44.834Z</updated>
     <content type="html"><![CDATA[<p>上篇博客中，介绍了下网络拓扑的规划和设计，现在，着重介绍下CentOS与H3C路由器的ipsecVPN的配置，CentOS使用的软件包是openswan，由于办公网络使用的是民用网，出口IP不固定，因此采用ike野蛮模式进行协商</p>
 <h2 id="IPsec介绍">IPsec介绍</h2><p>IPsec 协议工作在OSI 模型的第三层，使其在单独使用时适于保护基于TCP或UDP的协议（如 安全套接子层（SSL）就不能保护UDP层的通信流）。这就意味着，与传输层或更高层的协议相比，IPsec协议必须处理可靠性和分片的问题，这同时也增加了它的复杂性和处理开销。它有两种安全协议，分别是AH和ESP，AH主要提供身份验证和数据完整性验证，ESP则提供身份验证，数据完整性验证以及加密功能（我们选用ESP）。封装模式有传输模式和隧道模式（我们选择隧道模式）。密钥管理采用ISAKMP。详细内容可以到H3C的<br><a href="http://www.h3c.com.cn/Service/Channel_Service/Operational_Service/ICG_Technology/201005/675214_30005_0.htm" target="_blank" rel="external">IPsec原理</a>介绍帖子中查看，讲的挺详细的。</p>
 <h2 id="CentOS配置">CentOS配置</h2><p>CentOS中可以通过yum安装对应的包</p>
@@ -438,6 +439,13 @@ rule <span class="number">20</span> deny ip
 <!--lang:bash-->
 <pre><code><span class="class"><span class="keyword">interface</span> <span class="title">Dialup</span> 1</span>
 ipsec policy bj
+</code></pre><p>天津出口路由器跟北京路由器的配置类似</p>
+<h2 id="iptables虚拟公有云172-16-2-0/24虚拟网段">iptables虚拟公有云172.16.2.0/24虚拟网段</h2><p>在办公网络通过172.16.2.1:3306访问在Database上监听10.1.10.1:3306的数据库，为10.1.10.3授权一个只读账号<br>通过snat+dnat实现，在iptables nat表中添加如下内容</p>
+<!--lang:bash-->
+<pre><code>-A PREROUTING -d <span class="number">172.16</span><span class="number">.2</span><span class="number">.1</span>/<span class="number">32</span> -p tcp -m tcp --dport <span class="number">3306</span> -j DNAT --to-destination <span class="number">10.1</span><span class="number">.10</span><span class="number">.1</span>
+-A POSTROUTING -s <span class="number">192.168</span><span class="number">.2</span><span class="number">.0</span>/<span class="number">24</span> -o eth0 -p tcp -j MASQUERADE
+-A POSTROUTING -s <span class="number">172.16</span><span class="number">.1</span><span class="number">.0</span>/<span class="number">24</span> -o eth0 -p tcp -j MASQUERADE
+-A POSTROUTING -s  <span class="number">192.168</span><span class="number">.3</span><span class="number">.0</span>/<span class="number">24</span> -o eth0 -p tcp -j MASQUERADE
 </code></pre>]]></content>
     <summary type="html">
     <![CDATA[<p>上篇博客中，介绍了下网络拓扑的规划和设计，现在，着重介绍下CentOS与H3C路由器的ipsecVPN的配置，CentOS使用的软件包是openswan，由于办公网络使用的是民用网，出口IP不固定，因此采用ike野蛮模式进行协商</p>
