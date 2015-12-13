@@ -57,3 +57,7 @@ OpenVpn的技术核心是虚拟网卡，其次是SSL协议实现，由于SSL协�
     persist-tun
     status openvpn-status.log
     verb 3
+    
+    
+## 结束
+    至此，一个简单的多地域办公+远程办公的网络环境建立完成

@@ -262,3 +262,20 @@ CentOS中可以通过yum安装对应的包
 
     interface Dialup 1
     ipsec policy bj
+    
+    
+天津出口路由器跟北京路由器的配置类似
+
+
+
+## iptables虚拟公有云172.16.2.0/24虚拟网段
+
+在办公网络通过172.16.2.1:3306访问在Database上监听10.1.10.1:3306的数据库，为10.1.10.3授权一个只读账号
+通过snat+dnat实现，在iptables nat表中添加如下内容
+
+<!--lang:bash-->
+
+    -A PREROUTING -d 172.16.2.1/32 -p tcp -m tcp --dport 3306 -j DNAT --to-destination 10.1.10.1
+    -A POSTROUTING -s 192.168.2.0/24 -o eth0 -p tcp -j MASQUERADE
+    -A POSTROUTING -s 172.16.1.0/24 -o eth0 -p tcp -j MASQUERADE
+    -A POSTROUTING -s  192.168.3.0/24 -o eth0 -p tcp -j MASQUERADE
