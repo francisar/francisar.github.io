@@ -44,6 +44,11 @@ timeline:
   word: More
 widgets: 
 - calendar
+- recent_posts
+- category
+- tag
+- tagcloud
+
 #Links
 #links:
 #- name: Kieran
