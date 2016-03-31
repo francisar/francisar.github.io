@@ -243,26 +243,44 @@ var _hmt = _hmt || [];
         </div>
         <div class="col-md-8 col-md-offset-2">
       		<h2 id="踩坑">踩坑</h2><p>最近在做一个数据采集的功能，每5分钟采集一次数据，由于数据是从日志中采集分析，通过crontab给spark提交任务去计算的，spark任务无法保证是在整5分钟间隔的时候执行（比如：00分，5分，10分），所以需要对当前时间做下处理，将非整5分钟的时间修改为整5分钟，然后做日志筛选<br>时间处理的具体代码如下:<br><!--lang:python--></p>
-<p>now = time.time() - 300                                   #当前时间延后5分钟<br>daypath = time.strftime(“%Y%m%d”,time.localtime(now))     #取当天的日志路径<br>hour = time.strftime(“%H%M”,time.localtime(now))          #取小时分钟<br>minute = eval(hour)                                       #讲小时分钟转换为数字<br>minute = minute - (minute % 5)                            #将分钟对5取模，减去余数<br>rowkey = “%s%04d” % (daypath,minute)                      #生成hbase rowkey(201603301320)<br>end = time.mktime(time.strptime(rowkey,’%Y%m%d%H%M’))     #将rowkey换算为时间戳<br>begin = end - 300                                         #取begin到end之间的日志</p>
-<p>以上代码在白天运行时毫无问题，但是到凌晨一点开始，没有计算没有数据了<br>经过分析发现，minute = eval(hour) 在晚上1点开始的时候，假设hour是0115，eval转换时会将hour视为八进制的数字，所以转换以后是163<br>minute = minute - (minute % 5)后，minute变为160，rowkey = “%s%04d” % (daypath,minute） 执行后，rowkey为201603300160，时间完全错<br>了，自然筛选不到日志</p>
+<pre><code>now = <span class="keyword">time</span>.<span class="keyword">time</span>() - <span class="number">300</span>                                   <span class="comment">#当前时间延后5分钟 </span>
+daypath = <span class="keyword">time</span>.strftime(<span class="string">"<span class="variable">%Y</span><span class="variable">%m</span><span class="variable">%d</span>"</span>,<span class="keyword">time</span>.<span class="keyword">localtime</span>(now))     <span class="comment">#取当天的日志路径</span>
+hour = <span class="keyword">time</span>.strftime(<span class="string">"<span class="variable">%H</span><span class="variable">%M</span>"</span>,<span class="keyword">time</span>.<span class="keyword">localtime</span>(now))          <span class="comment">#取小时分钟</span>
+minute = <span class="keyword">eval</span>(hour)                                       <span class="comment">#讲小时分钟转换为数字 </span>
+minute = minute - (minute % <span class="number">5</span>)                            <span class="comment">#将分钟对5取模，减去余数</span>
+rowkey = <span class="string">"<span class="variable">%s</span><span class="variable">%04d</span>"</span> % (daypath,minute)                      <span class="comment">#生成hbase rowkey(201603301320)</span>
+end = <span class="keyword">time</span>.mktime(<span class="keyword">time</span>.strptime(rowkey,<span class="string">'%Y%m%d%H%M'</span>))     <span class="comment">#将rowkey换算为时间戳 </span>
+begin = end - <span class="number">300</span>                                         <span class="comment">#取begin到end之间的日志</span>
+</code></pre><p>以上代码在白天运行时毫无问题，但是到凌晨一点开始，没有计算没有数据了<br>经过分析发现，minute = eval(hour) 在晚上1点开始的时候，假设hour是0115，eval转换时会将hour视为八进制的数字，所以转换以后是163<br>minute = minute - (minute % 5)后，minute变为160，rowkey = “%s%04d” % (daypath,minute） 执行后，rowkey为201603300160，时间完全错<br>了，自然筛选不到日志</p>
 <h2 id="eval">eval</h2><!--lang:python-->
-<p>eval(expression[, globals[, locals]])</p>
-<p>The expression argument is parsed and evaluated as a Python expression (technically speaking, a condition list) using the globals and locals dictionaries as global and local namespace. If the globals dictionary is present and lacks ‘<strong>builtins</strong>’, the current globals are copied into globals before expression is parsed. This means that expression normally has full access to the standard <strong>builtin</strong> module and restricted environments are propagated. If the locals dictionary is omitted it defaults to the globals dictionary. If both dictionaries are omitted, the expression is executed in the environment where eval() is called. The return value is the result of the evaluated expression.</p>
+<pre><code><span class="function"><span class="title">eval</span><span class="params">(expression[, globals[, locals]])</span></span>
+</code></pre><p>The expression argument is parsed and evaluated as a Python expression (technically speaking, a condition list) using the globals and locals dictionaries as global and local namespace. If the globals dictionary is present and lacks ‘<strong>builtins</strong>’, the current globals are copied into globals before expression is parsed. This means that expression normally has full access to the standard <strong>builtin</strong> module and restricted environments are propagated. If the locals dictionary is omitted it defaults to the globals dictionary. If both dictionaries are omitted, the expression is executed in the environment where eval() is called. The return value is the result of the evaluated expression.</p>
 <p>expression参数会被解析为python表达式来执行，eval有三个参数，expression，globals，locals，globals和locals可选，传入字典，分别对应expression全局命名空间和局部命名空间，globals传入的字典中如果没有<strong>builtins</strong>，当前全局<strong>builtins</strong>将会在expression执行前传入globals</p>
 <h2 id="python变量解析原则">python变量解析原则</h2><p>我们都知道python变量名解析遵循LEGB原则，即首先是本地,之后是函数内，之后是全局，最后是内置。<br>在默认的情况下，变量名赋值会创建或者改变本地变量当函数中使用未认证的变量名时，Python就会搜索4个作用域（本地作用域，之后是上一层结构中def或lambda的本地作用域，之后是全局作用域，最后是内置作用域。<br>以下面代码为例:<br><!--lang:python--></p>
-<p>g = ‘I am global’<br>def local():<br>    e = ‘I am function’<br>    if g is not None:<br>        l = ‘I am local’<br>        print g,e,l,len(g)</p>
-<p>代码1-1</p>
+<pre><code>g = <span class="string">'I am global'</span>
+<span class="function"><span class="keyword">def</span> <span class="title">local</span><span class="params">()</span>:</span>
+    e = <span class="string">'I am function'</span>
+    <span class="keyword">if</span> g <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:
+        l = <span class="string">'I am local'</span>
+        <span class="keyword">print</span> g,e,l,len(g)
+</code></pre><p>代码1-1</p>
 <p>从如上代码看：<br>在print g,e,l执行时，l来自本地变量，e来自函数内变量，g为全局变量,那么什么是内置变量呢，内置变量就是上面所说的<strong>builtins</strong>相关，而len(g)中的len来自内置变量</p>
 <h2 id="python内置变量">python内置变量</h2><p>在Python中，有一个内建模块，该模块中有一些常用函数;而该模块在Python启动后、且没有执行程序员所写的任何代码前，Python会首先加载该内建函数到内存。另外，该内建模块中的功能可以直接使用，不用在其前添加内建模块前缀。比如：内建模块中有一个len()函数，计算一个对象的长度，如len(‘aaa’)将返回3。</p>
 <p>在Python2.X版本中，内建模块被命名为<strong>builtin</strong>，而到了Python3.X版本中，却更名为builtins</p>
 <p>当使用内建模块中函数或其它功能时，可以直接使用，不用添加内建模块的名字;但是，如果想要向内建模块中添加一些功能，以便在任何函数中都能直接使用而不用再进行import，这时，就要导入内建模块，在内建模块的命名空间(即<strong>dict</strong>字典属性)中添加该功能。在导入时，如果是Python2.X版本，就要导入<strong>builtin</strong>模块;如果是Python3.X版本，就要导入builtins模块。</p>
 <p>例如实现一个加法函数并导入内建变量</p>
 <p>python2:<br><!--lang:python--></p>
-<p>import <strong>builtin</strong><br>def add(x,y):<br>    return x+y<br><strong>builtin</strong>.<strong>dict</strong>[‘add’] = add</p>
-<p>代码2-1</p>
+<pre><code><span class="keyword">import</span> __builtin__
+<span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(x,y)</span>:</span>
+    <span class="keyword">return</span> x+y
+__builtin__.__dict__[<span class="string">'add'</span>] = add
+</code></pre><p>代码2-1</p>
 <p>python3:<br><!--lang:python--></p>
-<p>import builtins<br>def add(x,y):<br>    return x+y<br>builtins.<strong>dict</strong>[‘add’] = add</p>
-<p>代码2-2</p>
+<pre><code><span class="keyword">import</span> builtins
+<span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(x,y)</span>:</span>
+    <span class="keyword">return</span> x+y
+builtins.__dict__[<span class="string">'add'</span>] = add
+</code></pre><p>代码2-2</p>
 <p>那<strong>builtins</strong>是什么呢</p>
 <p><strong>builtins</strong>即是引用，那么它内建模块有一个相同点：Python程序一旦启动，它们二者就会在程序员所写的代码没有运行之前就已经被加载到内存中了</p>
 <ol>
@@ -271,8 +289,16 @@ var _hmt = _hmt || [];
 </ol>
 <h2 id="再看eval">再看eval</h2><p>eval(expression[, globals[, locals]])</p>
 <p>当globals和locals为空时，expression运行在当前eval运行的全局名称空间和本地名称空间<br>当globals为空，locals不为空时，全局名称空间为当前eval运行的全局命名空间，本地名称空间为locals的传值<br>当globals不为空，expression的全局名称空间为globals（包括内置名称空间），如果locals为空，本地名称空间继承globals，如果locals不为空，expression的本地名称空间为locals<br><!--lang:python--></p>
-<p>g = ‘I am global’<br>def local():<br>    e = ‘I am function’<br>    if g is not None:<br>        l = ‘I am local’<br>        eval(“e”,None,{‘m’:123})  #NameError<br>        eval(“l”,None,{‘m’:123})  #NameError<br>        eval(“g”,None,{‘m’:123})  #’I am global’<br>        eval(“g”,{},{‘m’:123})    #NameError</p>
-
+<pre><code>g = <span class="string">'I am global'</span>
+<span class="function"><span class="keyword">def</span> <span class="title">local</span><span class="params">()</span>:</span>
+    e = <span class="string">'I am function'</span>
+    <span class="keyword">if</span> g <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:
+        l = <span class="string">'I am local'</span>
+        eval(<span class="string">"e"</span>,<span class="keyword">None</span>,{<span class="string">'m'</span>:<span class="number">123</span>})  <span class="comment">#NameError</span>
+        eval(<span class="string">"l"</span>,<span class="keyword">None</span>,{<span class="string">'m'</span>:<span class="number">123</span>})  <span class="comment">#NameError</span>
+        eval(<span class="string">"g"</span>,<span class="keyword">None</span>,{<span class="string">'m'</span>:<span class="number">123</span>})  <span class="comment">#'I am global'</span>
+        eval(<span class="string">"g"</span>,{},{<span class="string">'m'</span>:<span class="number">123</span>})    <span class="comment">#NameError</span>
+</code></pre>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
