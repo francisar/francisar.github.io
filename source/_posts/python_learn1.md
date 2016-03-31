@@ -9,14 +9,14 @@ tag: python LEGB eval
 时间处理的具体代码如下:
 <!--lang:python-->
 
-now = time.time() - 300                                   #当前时间延后5分钟 
-daypath = time.strftime("%Y%m%d",time.localtime(now))     #取当天的日志路径
-hour = time.strftime("%H%M",time.localtime(now))          #取小时分钟
-minute = eval(hour)                                       #讲小时分钟转换为数字 
-minute = minute - (minute % 5)                            #将分钟对5取模，减去余数
-rowkey = "%s%04d" % (daypath,minute)                      #生成hbase rowkey(201603301320)
-end = time.mktime(time.strptime(rowkey,'%Y%m%d%H%M'))     #将rowkey换算为时间戳 
-begin = end - 300                                         #取begin到end之间的日志
+    now = time.time() - 300                                   #当前时间延后5分钟 
+    daypath = time.strftime("%Y%m%d",time.localtime(now))     #取当天的日志路径
+    hour = time.strftime("%H%M",time.localtime(now))          #取小时分钟
+    minute = eval(hour)                                       #讲小时分钟转换为数字 
+    minute = minute - (minute % 5)                            #将分钟对5取模，减去余数
+    rowkey = "%s%04d" % (daypath,minute)                      #生成hbase rowkey(201603301320)
+    end = time.mktime(time.strptime(rowkey,'%Y%m%d%H%M'))     #将rowkey换算为时间戳 
+    begin = end - 300                                         #取begin到end之间的日志
 
 以上代码在白天运行时毫无问题，但是到凌晨一点开始，没有计算没有数据了
 经过分析发现，minute = eval(hour) 在晚上1点开始的时候，假设hour是0115，eval转换时会将hour视为八进制的数字，所以转换以后是163
@@ -27,7 +27,7 @@ minute = minute - (minute % 5)后，minute变为160，rowkey = "%s%04d" % (daypa
 
 <!--lang:python-->
 
-eval(expression[, globals[, locals]])
+    eval(expression[, globals[, locals]])
 
 The expression argument is parsed and evaluated as a Python expression (technically speaking, a condition list) using the globals and locals dictionaries as global and local namespace. If the globals dictionary is present and lacks ‘__builtins__’, the current globals are copied into globals before expression is parsed. This means that expression normally has full access to the standard __builtin__ module and restricted environments are propagated. If the locals dictionary is omitted it defaults to the globals dictionary. If both dictionaries are omitted, the expression is executed in the environment where eval() is called. The return value is the result of the evaluated expression.
 
@@ -41,12 +41,12 @@ expression参数会被解析为python表达式来执行，eval有三个参数，
 以下面代码为例:
 <!--lang:python-->
 
-g = 'I am global'
-def local():
-    e = 'I am function'
-    if g is not None:
-        l = 'I am local'
-        print g,e,l,len(g)
+    g = 'I am global'
+    def local():
+        e = 'I am function'
+        if g is not None:
+            l = 'I am local'
+            print g,e,l,len(g)
 
 代码1-1
 
@@ -66,20 +66,20 @@ def local():
 python2:
 <!--lang:python-->
 
-import __builtin__
-def add(x,y):
-    return x+y
-__builtin__.__dict__['add'] = add
+    import __builtin__
+    def add(x,y):
+        return x+y
+    __builtin__.__dict__['add'] = add
 
 代码2-1
 
 python3:
 <!--lang:python-->
 
-import builtins
-def add(x,y):
-    return x+y
-builtins.__dict__['add'] = add
+    import builtins
+    def add(x,y):
+        return x+y
+    builtins.__dict__['add'] = add
 
 代码2-2
 
@@ -102,15 +102,15 @@ eval(expression[, globals[, locals]])
 当globals不为空，expression的全局名称空间为globals（包括内置名称空间），如果locals为空，本地名称空间继承globals，如果locals不为空，expression的本地名称空间为locals
 <!--lang:python-->
 
-g = 'I am global'
-def local():
-    e = 'I am function'
-    if g is not None:
-        l = 'I am local'
-        eval("e",None,{'m':123})  #NameError
-        eval("l",None,{'m':123})  #NameError
-        eval("g",None,{'m':123})  #'I am global'
-        eval("g",{},{'m':123})    #NameError
+    g = 'I am global'
+    def local():
+        e = 'I am function'
+        if g is not None:
+            l = 'I am local'
+            eval("e",None,{'m':123})  #NameError
+            eval("l",None,{'m':123})  #NameError
+            eval("g",None,{'m':123})  #'I am global'
+            eval("g",{},{'m':123})    #NameError
 
 
 
