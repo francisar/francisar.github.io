@@ -122,6 +122,8 @@ var _hmt = _hmt || [];
         		<a class="sb-toggle-submenu">Categories<span class="sb-caret"></span></a>
             	<ul class="sb-submenu">
 				  	
+				    <li><a href="/categories/python/" class="animsition-link">python<small>(1)</small></a></li>
+				    
 				    <li><a href="/categories/网络技术/" class="animsition-link">网络技术<small>(3)</small></a></li>
 				    
 				</ul>
@@ -224,6 +226,42 @@ var _hmt = _hmt || [];
 
 <section id="intro">
     <div class="container">
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2016/03/31/python_learn1/">python eval踩坑后</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2016-03-31T05:14:00.000Z" itemprop="datePublished">
+          2016-03-31
+      </time>
+    
+    
+    | 
+    <a href='/tags/python-LEGB-eval/'>python LEGB eval</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        踩坑最近在做一个数据采集的功能，每5分钟采集一次数据，由于数据是从日志中采集分析，通过crontab给spark提交任务去计算的，spark任务无法保证是在整5分钟间隔的时候执行（比如：00分，5分，10分），所以需要对当前时间做下处理，将非整5分钟的时间修改为整5分钟，然后做日志筛选时间处理的具体代码如下:
+now = time.time() - 300                                   #当前时间延
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2016/03/31/python_learn1/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
         
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">

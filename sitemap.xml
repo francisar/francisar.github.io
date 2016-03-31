@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.franciscui.cn/2016/03/31/python_learn1/</loc>
+    <lastmod>2016-03-31T13:52:57.977Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.franciscui.cn/2015/11/26/CentOS_IPsec/</loc>
     <lastmod>2015-12-13T07:35:44.834Z</lastmod>
   </url>
