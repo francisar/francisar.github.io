@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Tag: VPN IPsec 网络 GRE | francisar&#39;s Blog</title>
+  <title>python shell交互与历史命令 | francisar&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -101,7 +101,7 @@ var _hmt = _hmt || [];
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -223,46 +223,61 @@ var _hmt = _hmt || [];
 
         <!-- ============================ END Hero Image =========================== -->
       
-
-
-<section id="services">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2015/11/26/Centos_ipsec_VPN/">基于公有云建设私有网络（一）</a></h4>
-                            
-                            <p><time datetime="2015-11-26T07:41:00.000Z"><a href="/2015/11/26/Centos_ipsec_VPN/">2015-11-26</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2015/11/26/CentOS_IPsec/">基于公有云建设私有网络（二）</a></h4>
-                            
-                            <p><time datetime="2015-11-26T07:41:00.000Z"><a href="/2015/11/26/CentOS_IPsec/">2015-11-26</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2016-04-05T05:20:00.000Z" itemprop="datePublished">
+          2016-04-05
+      </time>
+    
+    
+    | 
+    <a href='/tags/python-python交互shell/'>python python交互shell</a>
+    
+    
+</span>
+                <h1>python shell交互与历史命令</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<p>python的开发过程中，我们总会打开python的交互式终端，来进行一些代码测试，自己编译的python版本，在使用过程中发现无法使用上下左右键，导致使用起来非常不便。Linux中自带的python版本，都可以像GNU bash shell一样，可以左右编辑当前input，上下选择历史input。</p>
+<p>python的交互式终端，input编辑以及历史命令的选择，依赖于GNU readline library,因此在编译python前，需要先安装readline-devel。<br>已经编译完成的，安装readline-devel后，可以通过easy_install readline的方式来添加此功能（未测试）。</p>
+<h2 id="Key_Bindings">Key Bindings</h2><p>在python的终端中，可以进行一些自定义的设置，具体设置内容存放在~/.inputrc。<br>按键的自定义设置：<br>key-name: function-name<br>例如讲tab键设置自动补全<br>Tab: complete<br>（不过设置完以后发现无法根据python语法进行自动补全）</p>
+<p>也可以进行其他的一些选项设置<br>例如：<br>set horizontal-scroll-mode On  #如果输入超过了screen宽度，仍然单行显示</p>
+<p>选项以及按键自定义设置具体可以参考<a href="http://web.mit.edu/gnu/doc/html/rlman_1.html" target="_blank" rel="external">这里</a></p>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>成长之美</p>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2016/03/31/python_learn1/">
+        python eval踩坑后 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="2016/04/05/python_learn2/" data-title="python shell交互与历史命令" data-url="http://blog.franciscui.cn/2016/04/05/python_learn2/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"franciscui"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 
