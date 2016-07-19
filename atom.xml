@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.franciscui.cn/"/>
-  <updated>2016-07-19T14:16:56.965Z</updated>
+  <updated>2016-07-19T14:21:39.969Z</updated>
   <id>http://blog.franciscui.cn/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.franciscui.cn/2016/07/18/svn_compile/"/>
     <id>http://blog.franciscui.cn/2016/07/18/svn_compile/</id>
     <published>2016-07-18T14:27:00.000Z</published>
-    <updated>2016-07-19T14:16:56.965Z</updated>
+    <updated>2016-07-19T14:21:39.969Z</updated>
     <content type="html"><![CDATA[<p>svn �汾1.9.4<br>ϵͳcentos6.2<br>���밲װ��svn�ǳɹ��ˣ���linux��ִ�� svn checkout http://…. ����ʱ�򱨴�<br>svn: E170000: Unrecognized URL scheme for<br>ִ��svn –version</p>
 <!--language:c-->
 <pre><code>svn, version <span class="number">1.9</span>.<span class="number">4</span> (r1740329)
