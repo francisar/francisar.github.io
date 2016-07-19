@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.franciscui.cn/"/>
-  <updated>2016-07-19T14:21:39.969Z</updated>
+  <updated>2016-07-19T14:26:07.049Z</updated>
   <id>http://blog.franciscui.cn/</id>
   
   <author>
@@ -15,12 +15,12 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[svn ����֧��httpЭ������]]></title>
+    <title><![CDATA[svn 编译支持http协议问题]]></title>
     <link href="http://blog.franciscui.cn/2016/07/18/svn_compile/"/>
     <id>http://blog.franciscui.cn/2016/07/18/svn_compile/</id>
     <published>2016-07-18T14:27:00.000Z</published>
-    <updated>2016-07-19T14:21:39.969Z</updated>
-    <content type="html"><![CDATA[<p>svn �汾1.9.4<br>ϵͳcentos6.2<br>���밲װ��svn�ǳɹ��ˣ���linux��ִ�� svn checkout http://…. ����ʱ�򱨴�<br>svn: E170000: Unrecognized URL scheme for<br>ִ��svn –version</p>
+    <updated>2016-07-19T14:26:07.049Z</updated>
+    <content type="html"><![CDATA[<p>svn 版本1.9.4<br>系统centos6.2<br>编译安装的svn是成功了，在linux上执行 svn checkout http://…. 命令时候报错<br>svn: E170000: Unrecognized URL scheme for<br>执行svn –version</p>
 <!--language:c-->
 <pre><code>svn, version <span class="number">1.9</span>.<span class="number">4</span> (r1740329)
 compiled Jul <span class="number">18</span> <span class="number">2016</span>, <span class="number">14</span>:<span class="number">01</span>:<span class="number">25</span> <span class="keyword">on</span> x86_64-unknown-linux-gnu
@@ -37,12 +37,12 @@ The following repository access (RA) modules are available:
      - handles <span class="string">'svn'</span> scheme
    * ra_local : <span class="keyword">Module</span> <span class="keyword">for</span> accessing a repository <span class="keyword">on</span> local disk.
      - handles <span class="string">'file'</span> scheme
-</code></pre><p>û��’http’ scheme��</p>
-<p>ԭ����svn1.8�汾�Ժ�����Ҫserf������֧�ַ��� http Э���İ汾�⣬��Ȼ�ͻᱨ��.serf��Ҫ��scons�����밲װ�������Ȱ�װ��scons</p>
+</code></pre><p>没有’http’ scheme。</p>
+<p>原来，svn1.8版本以后，需要serf软件包支持访问 http 协议的版本库，不然就会报错.serf需要用scons来编译安装，所以先安装下scons</p>
 <!--language:c-->
 <pre><code>pip <span class="keyword">install</span> scons
-</code></pre><p>ע���������Լ�������python�汾��scons��װ�ɹ�������python��bin·���±༭��scons�ļ���������#! /usr/bin/env python �޸�Ϊ�Լ�������pythonִ��·��</p>
-<p>svn 1.9.4�汾��Ҫserf1.3.4���ϰ汾�������ص���1.3.8</p>
+</code></pre><p>注：如果是自己编译的python版本，scons安装成功后，再python的bin路径下编辑下scons文件，将首行#! /usr/bin/env python 修改为自己编译的python执行路径</p>
+<p>svn 1.9.4版本需要serf1.3.4以上版本，我下载的是1.3.8</p>
 <!--language:c-->
 <pre><code>wget https:<span class="comment">//archive.apache.org/dist/serf/serf-1.3.8.tar.bz2</span>
 tar -xvf serf-<span class="number">1.3</span><span class="number">.8</span>.tar.bz2
@@ -50,16 +50,16 @@ cd serf-<span class="number">1.3</span><span class="number">.8</span>
 scons PREFIX=/usr/local/serf APR=/apps/apr/bin/apr-<span class="number">1</span>-config APU=/apps/apr-util/bin/apu-<span class="number">1</span>-config
 scons install
 scons -c
-</code></pre><p>���±���svn ���� –with-serf=/usr/local/serf</p>
+</code></pre><p>重新编译svn 加上 –with-serf=/usr/local/serf</p>
 <!--language:c-->
 <pre><code>./configure  --<span class="keyword">with</span>-serf=/usr/<span class="keyword">local</span>/serf
-</code></pre><p>Ȼ����serf��lib·�����ӵ�ϵͳ����·��</p>
+</code></pre><p>然后将serf的lib路径添加到系统搜索路径</p>
 <!--language:c-->
 <pre><code>vim /etc/ld.so.conf.d/serf.conf
-�������ݣ�/usr/local/serf/<span class="class"><span class="keyword">lib</span></span>
+加入内容：/usr/local/serf/<span class="class"><span class="keyword">lib</span></span>
 ldconfig
-</code></pre><p>�����ᱨ��<br>svn: error while loading shared libraries: libserf-1.so.1: cannot open shared object file: No such file or directory</p>
-<p>svn –version ������Ϣ</p>
+</code></pre><p>否则会报错<br>svn: error while loading shared libraries: libserf-1.so.1: cannot open shared object file: No such file or directory</p>
+<p>svn –version 看下信息</p>
 <!--language:c-->
 <pre><code>svn, version <span class="number">1.9</span>.<span class="number">4</span> (r1740329)
 compiled Jul <span class="number">18</span> <span class="number">2016</span>, <span class="number">14</span>:<span class="number">01</span>:<span class="number">25</span> <span class="keyword">on</span> x86_64-unknown-linux-gnu
@@ -82,7 +82,7 @@ The following repository access (RA) modules are available:
     - handles <span class="string">'https'</span> scheme
 </code></pre>]]></content>
     <summary type="html">
-    <![CDATA[<p>svn �汾1.9.4<br>ϵͳcentos6.2<br>���밲װ��svn�ǳɹ��ˣ���linux��ִ�� svn checkout http://…. ����ʱ�򱨴�<br>svn: E170000: Unrecognized URL scheme for]]>
+    <![CDATA[<p>svn 版本1.9.4<br>系统centos6.2<br>编译安装的svn是成功了，在linux上执行 svn checkout http://…. 命令时候报错<br>svn: E170000: Unrecognized URL scheme for<br>执行svn ]]>
     </summary>
     
       <category term="svn http" scheme="http://blog.franciscui.cn/tags/svn-http/"/>
