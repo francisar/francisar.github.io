@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Tag: python python交互shell | francisar&#39;s Blog</title>
+  <title>svn ����֧��httpЭ������ | francisar&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -101,7 +101,7 @@ var _hmt = _hmt || [];
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -227,37 +227,116 @@ var _hmt = _hmt || [];
 
         <!-- ============================ END Hero Image =========================== -->
       
-
-
-<section id="services">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/04/05/python_learn2/">python shell交互与历史命令</a></h4>
-                            
-                            <p><time datetime="2016-04-05T05:20:00.000Z"><a href="/2016/04/05/python_learn2/">2016-04-05</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2016-07-18T14:27:00.000Z" itemprop="datePublished">
+          2016-07-18
+      </time>
+    
+    
+    | 
+    <a href='/tags/svn-http/'>svn http</a>
+    
+    
+</span>
+                <h1>svn ����֧��httpЭ������</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<p>svn �汾1.9.4<br>ϵͳcentos6.2<br>���밲װ��svn�ǳɹ��ˣ���linux��ִ�� svn checkout http://…. ����ʱ�򱨴�<br>svn: E170000: Unrecognized URL scheme for<br>ִ��svn –version</p>
+<!--language:c-->
+<pre><code>svn, version <span class="number">1.9</span>.<span class="number">4</span> (r1740329)
+compiled Jul <span class="number">18</span> <span class="number">2016</span>, <span class="number">14</span>:<span class="number">01</span>:<span class="number">25</span> <span class="keyword">on</span> x86_64-unknown-linux-gnu
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>成长之美</p>
+Copyright (C) <span class="number">2016</span> The Apache Software Foundation.
+This software consists <span class="keyword">of</span> contributions made <span class="keyword">by</span> many people;
+see the NOTICE file <span class="keyword">for</span> more information.
+Subversion <span class="keyword">is</span> open source software, see http:<span class="comment">//subversion.apache.org/</span>
+
+The following repository access (RA) modules are available:
+
+   * ra_svn : <span class="keyword">Module</span> <span class="keyword">for</span> accessing a repository <span class="keyword">using</span> the svn network protocol.
+     - <span class="keyword">with</span> Cyrus SASL authentication
+     - handles <span class="string">'svn'</span> scheme
+   * ra_local : <span class="keyword">Module</span> <span class="keyword">for</span> accessing a repository <span class="keyword">on</span> local disk.
+     - handles <span class="string">'file'</span> scheme
+</code></pre><p>û��’http’ scheme��</p>
+<p>ԭ����svn1.8�汾�Ժ�����Ҫserf������֧�ַ��� http Э���İ汾�⣬��Ȼ�ͻᱨ��.serf��Ҫ��scons�����밲װ�������Ȱ�װ��scons</p>
+<!--language:c-->
+<pre><code>pip <span class="keyword">install</span> scons
+</code></pre><p>ע���������Լ�������python�汾��scons��װ�ɹ�������python��bin·���±༭��scons�ļ���������#! /usr/bin/env python �޸�Ϊ�Լ�������pythonִ��·��</p>
+<p>svn 1.9.4�汾��Ҫserf1.3.4���ϰ汾�������ص���1.3.8</p>
+<!--language:c-->
+<pre><code>wget https:<span class="comment">//archive.apache.org/dist/serf/serf-1.3.8.tar.bz2</span>
+tar -xvf serf-<span class="number">1.3</span><span class="number">.8</span>.tar.bz2
+cd serf-<span class="number">1.3</span><span class="number">.8</span>
+scons PREFIX=/usr/local/serf APR=/apps/apr/bin/apr-<span class="number">1</span>-config APU=/apps/apr-util/bin/apu-<span class="number">1</span>-config
+scons install
+scons -c
+</code></pre><p>���±���svn ���� –with-serf=/usr/local/serf</p>
+<!--language:c-->
+<pre><code>./configure  --<span class="keyword">with</span>-serf=/usr/<span class="keyword">local</span>/serf
+</code></pre><p>Ȼ����serf��lib·�����ӵ�ϵͳ����·��</p>
+<!--language:c-->
+<pre><code>vim /etc/ld.so.conf.d/serf.conf
+�������ݣ�/usr/local/serf/<span class="class"><span class="keyword">lib</span></span>
+ldconfig
+</code></pre><p>�����ᱨ��<br>svn: error while loading shared libraries: libserf-1.so.1: cannot open shared object file: No such file or directory</p>
+<p>svn –version ������Ϣ</p>
+<!--language:c-->
+<pre><code>svn, version <span class="number">1.9</span>.<span class="number">4</span> (r1740329)
+compiled Jul <span class="number">18</span> <span class="number">2016</span>, <span class="number">14</span>:<span class="number">01</span>:<span class="number">25</span> <span class="keyword">on</span> x86_64-unknown-linux-gnu
+
+Copyright (C) <span class="number">2016</span> The Apache Software Foundation.
+This software consists <span class="keyword">of</span> contributions made <span class="keyword">by</span> many people;
+see the NOTICE file <span class="keyword">for</span> more information.
+Subversion <span class="keyword">is</span> open source software, see http:<span class="comment">//subversion.apache.org/</span>
+
+The following repository access (RA) modules are available:
+
+* ra_svn : <span class="keyword">Module</span> <span class="keyword">for</span> accessing a repository <span class="keyword">using</span> the svn network protocol.
+    - <span class="keyword">with</span> Cyrus SASL authentication
+    - handles <span class="string">'svn'</span> scheme
+* ra_local : <span class="keyword">Module</span> <span class="keyword">for</span> accessing a repository <span class="keyword">on</span> local disk.
+    - handles <span class="string">'file'</span> scheme
+* ra_serf : <span class="keyword">Module</span> <span class="keyword">for</span> accessing a repository via WebDAV protocol <span class="keyword">using</span> serf.
+    - <span class="keyword">using</span> serf <span class="number">1.3</span>.<span class="number">8</span> (compiled <span class="keyword">with</span> <span class="number">1.3</span>.<span class="number">8</span>)
+    - handles <span class="string">'http'</span> scheme
+    - handles <span class="string">'https'</span> scheme
+</code></pre>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2016/04/09/hadoop_learn1/">
+        hadoop snappy压缩 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="2016/07/18/svn_compile/" data-title="svn ����֧��httpЭ������" data-url="http://blog.franciscui.cn/2016/07/18/svn_compile/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"franciscui"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

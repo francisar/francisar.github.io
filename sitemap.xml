@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.franciscui.cn/2016/07/18/svn_compile/</loc>
+    <lastmod>2016-07-19T14:16:56.965Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.franciscui.cn/2016/04/09/hadoop_learn1/</loc>
+    <lastmod>2016-07-19T14:16:56.965Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.franciscui.cn/2016/04/05/python_learn2/</loc>
     <lastmod>2016-04-05T13:23:43.479Z</lastmod>
   </url>

@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.franciscui.cn/"/>
-  <updated>2016-04-05T13:23:43.479Z</updated>
+  <updated>2016-07-19T14:16:56.965Z</updated>
   <id>http://blog.franciscui.cn/</id>
   
   <author>
@@ -13,6 +13,103 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[svn ����֧��httpЭ������]]></title>
+    <link href="http://blog.franciscui.cn/2016/07/18/svn_compile/"/>
+    <id>http://blog.franciscui.cn/2016/07/18/svn_compile/</id>
+    <published>2016-07-18T14:27:00.000Z</published>
+    <updated>2016-07-19T14:16:56.965Z</updated>
+    <content type="html"><![CDATA[<p>svn �汾1.9.4<br>ϵͳcentos6.2<br>���밲װ��svn�ǳɹ��ˣ���linux��ִ�� svn checkout http://…. ����ʱ�򱨴�<br>svn: E170000: Unrecognized URL scheme for<br>ִ��svn –version</p>
+<!--language:c-->
+<pre><code>svn, version <span class="number">1.9</span>.<span class="number">4</span> (r1740329)
+compiled Jul <span class="number">18</span> <span class="number">2016</span>, <span class="number">14</span>:<span class="number">01</span>:<span class="number">25</span> <span class="keyword">on</span> x86_64-unknown-linux-gnu
+
+Copyright (C) <span class="number">2016</span> The Apache Software Foundation.
+This software consists <span class="keyword">of</span> contributions made <span class="keyword">by</span> many people;
+see the NOTICE file <span class="keyword">for</span> more information.
+Subversion <span class="keyword">is</span> open source software, see http:<span class="comment">//subversion.apache.org/</span>
+
+The following repository access (RA) modules are available:
+
+   * ra_svn : <span class="keyword">Module</span> <span class="keyword">for</span> accessing a repository <span class="keyword">using</span> the svn network protocol.
+     - <span class="keyword">with</span> Cyrus SASL authentication
+     - handles <span class="string">'svn'</span> scheme
+   * ra_local : <span class="keyword">Module</span> <span class="keyword">for</span> accessing a repository <span class="keyword">on</span> local disk.
+     - handles <span class="string">'file'</span> scheme
+</code></pre><p>û��’http’ scheme��</p>
+<p>ԭ����svn1.8�汾�Ժ�����Ҫserf������֧�ַ��� http Э���İ汾�⣬��Ȼ�ͻᱨ��.serf��Ҫ��scons�����밲װ�������Ȱ�װ��scons</p>
+<!--language:c-->
+<pre><code>pip <span class="keyword">install</span> scons
+</code></pre><p>ע���������Լ�������python�汾��scons��װ�ɹ�������python��bin·���±༭��scons�ļ���������#! /usr/bin/env python �޸�Ϊ�Լ�������pythonִ��·��</p>
+<p>svn 1.9.4�汾��Ҫserf1.3.4���ϰ汾�������ص���1.3.8</p>
+<!--language:c-->
+<pre><code>wget https:<span class="comment">//archive.apache.org/dist/serf/serf-1.3.8.tar.bz2</span>
+tar -xvf serf-<span class="number">1.3</span><span class="number">.8</span>.tar.bz2
+cd serf-<span class="number">1.3</span><span class="number">.8</span>
+scons PREFIX=/usr/local/serf APR=/apps/apr/bin/apr-<span class="number">1</span>-config APU=/apps/apr-util/bin/apu-<span class="number">1</span>-config
+scons install
+scons -c
+</code></pre><p>���±���svn ���� –with-serf=/usr/local/serf</p>
+<!--language:c-->
+<pre><code>./configure  --<span class="keyword">with</span>-serf=/usr/<span class="keyword">local</span>/serf
+</code></pre><p>Ȼ����serf��lib·�����ӵ�ϵͳ����·��</p>
+<!--language:c-->
+<pre><code>vim /etc/ld.so.conf.d/serf.conf
+�������ݣ�/usr/local/serf/<span class="class"><span class="keyword">lib</span></span>
+ldconfig
+</code></pre><p>�����ᱨ��<br>svn: error while loading shared libraries: libserf-1.so.1: cannot open shared object file: No such file or directory</p>
+<p>svn –version ������Ϣ</p>
+<!--language:c-->
+<pre><code>svn, version <span class="number">1.9</span>.<span class="number">4</span> (r1740329)
+compiled Jul <span class="number">18</span> <span class="number">2016</span>, <span class="number">14</span>:<span class="number">01</span>:<span class="number">25</span> <span class="keyword">on</span> x86_64-unknown-linux-gnu
+
+Copyright (C) <span class="number">2016</span> The Apache Software Foundation.
+This software consists <span class="keyword">of</span> contributions made <span class="keyword">by</span> many people;
+see the NOTICE file <span class="keyword">for</span> more information.
+Subversion <span class="keyword">is</span> open source software, see http:<span class="comment">//subversion.apache.org/</span>
+
+The following repository access (RA) modules are available:
+
+* ra_svn : <span class="keyword">Module</span> <span class="keyword">for</span> accessing a repository <span class="keyword">using</span> the svn network protocol.
+    - <span class="keyword">with</span> Cyrus SASL authentication
+    - handles <span class="string">'svn'</span> scheme
+* ra_local : <span class="keyword">Module</span> <span class="keyword">for</span> accessing a repository <span class="keyword">on</span> local disk.
+    - handles <span class="string">'file'</span> scheme
+* ra_serf : <span class="keyword">Module</span> <span class="keyword">for</span> accessing a repository via WebDAV protocol <span class="keyword">using</span> serf.
+    - <span class="keyword">using</span> serf <span class="number">1.3</span>.<span class="number">8</span> (compiled <span class="keyword">with</span> <span class="number">1.3</span>.<span class="number">8</span>)
+    - handles <span class="string">'http'</span> scheme
+    - handles <span class="string">'https'</span> scheme
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>svn �汾1.9.4<br>ϵͳcentos6.2<br>���밲װ��svn�ǳɹ��ˣ���linux��ִ�� svn checkout http://…. ����ʱ�򱨴�<br>svn: E170000: Unrecognized URL scheme for]]>
+    </summary>
+    
+      <category term="svn http" scheme="http://blog.franciscui.cn/tags/svn-http/"/>
+    
+      <category term="subversion" scheme="http://blog.franciscui.cn/categories/subversion/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[hadoop snappy压缩]]></title>
+    <link href="http://blog.franciscui.cn/2016/04/09/hadoop_learn1/"/>
+    <id>http://blog.franciscui.cn/2016/04/09/hadoop_learn1/</id>
+    <published>2016-04-09T04:49:00.000Z</published>
+    <updated>2016-07-19T14:16:56.965Z</updated>
+    <content type="html"><![CDATA[<p>hdfs dfs -du -s -h /lagou/logs/lg-main-nginx/20160401<br>28.2 G  56.6 G  /lagou/logs/lg-main-nginx/20160401<br>hdfs dfs -ls -h /lagou/logs/backup/lg-main-nginx/201604<br>-rw-r–r–   2 root supergroup       9.7 G 2016-04-09 12:40 /lagou/logs/backup/lg-main-nginx/201604/access.20160401.snappy<br>real    7m28.633s<br>user    2m7.403s<br>sys     1m7.918s</p>
+<p>64Mb/s</p>
+<p>real    10m47.011s<br>user    1m42.091s<br>sys     0m49.264s</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>hdfs dfs -du -s -h /lagou/logs/lg-main-nginx/20160401<br>28.2 G  56.6 G  /lagou/logs/lg-main-nginx/20160401<br>hdfs dfs -ls -h /lagou/log]]>
+    </summary>
+    
+      <category term="hadoop hdfs snappy java" scheme="http://blog.franciscui.cn/tags/hadoop-hdfs-snappy-java/"/>
+    
+      <category term="hadoop" scheme="http://blog.franciscui.cn/categories/hadoop/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[python shell交互与历史命令]]></title>
