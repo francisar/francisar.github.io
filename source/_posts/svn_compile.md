@@ -1,14 +1,14 @@
-title:  "svn ±àÒëÖ§³ÖhttpĞ­ÒéÎÊÌâ"
+title:  "svn ç¼–è¯‘æ”¯æŒhttpåè®®é—®é¢˜"
 date:   2016/07/18 22:27
 categories: subversion
 tag: svn http
 ---
 
-svn °æ±¾1.9.4
-ÏµÍ³centos6.2
-±àÒë°²×°µÄsvnÊÇ³É¹¦ÁË£¬ÔÚlinuxÉÏÖ´ĞĞ svn checkout http://.... ÃüÁîÊ±ºò±¨´í
+svn ç‰ˆæœ¬1.9.4
+ç³»ç»Ÿcentos6.2
+ç¼–è¯‘å®‰è£…çš„svnæ˜¯æˆåŠŸäº†ï¼Œåœ¨linuxä¸Šæ‰§è¡Œ svn checkout http://.... å‘½ä»¤æ—¶å€™æŠ¥é”™
 svn: E170000: Unrecognized URL scheme for
-Ö´ĞĞsvn --version
+æ‰§è¡Œsvn --version
 
 
 <!--language:c-->
@@ -30,17 +30,17 @@ svn: E170000: Unrecognized URL scheme for
          - handles 'file' scheme
 
 
-Ã»ÓĞ'http' scheme¡£
+æ²¡æœ‰'http' schemeã€‚
 
-Ô­À´£¬svn1.8°æ±¾ÒÔºó£¬ĞèÒªserfÈí¼ş°üÖ§³Ö·ÃÎÊ http Ğ­ÒéµÄ°æ±¾¿â£¬²»È»¾Í»á±¨´í.serfĞèÒªÓÃsconsÀ´±àÒë°²×°£¬ËùÒÔÏÈ°²×°ÏÂscons
+åŸæ¥ï¼Œsvn1.8ç‰ˆæœ¬ä»¥åï¼Œéœ€è¦serfè½¯ä»¶åŒ…æ”¯æŒè®¿é—® http åè®®çš„ç‰ˆæœ¬åº“ï¼Œä¸ç„¶å°±ä¼šæŠ¥é”™.serféœ€è¦ç”¨sconsæ¥ç¼–è¯‘å®‰è£…ï¼Œæ‰€ä»¥å…ˆå®‰è£…ä¸‹scons
 
 <!--language:c-->
 
     pip install scons
 
-×¢£ºÈç¹ûÊÇ×Ô¼º±àÒëµÄpython°æ±¾£¬scons°²×°³É¹¦ºó£¬ÔÙpythonµÄbinÂ·¾¶ÏÂ±à¼­ÏÂsconsÎÄ¼ş£¬½«Ê×ĞĞ#! /usr/bin/env python ĞŞ¸ÄÎª×Ô¼º±àÒëµÄpythonÖ´ĞĞÂ·¾¶
+æ³¨ï¼šå¦‚æœæ˜¯è‡ªå·±ç¼–è¯‘çš„pythonç‰ˆæœ¬ï¼Œsconså®‰è£…æˆåŠŸåï¼Œå†pythonçš„binè·¯å¾„ä¸‹ç¼–è¾‘ä¸‹sconsæ–‡ä»¶ï¼Œå°†é¦–è¡Œ#! /usr/bin/env python ä¿®æ”¹ä¸ºè‡ªå·±ç¼–è¯‘çš„pythonæ‰§è¡Œè·¯å¾„
 
-svn 1.9.4°æ±¾ĞèÒªserf1.3.4ÒÔÉÏ°æ±¾£¬ÎÒÏÂÔØµÄÊÇ1.3.8
+svn 1.9.4ç‰ˆæœ¬éœ€è¦serf1.3.4ä»¥ä¸Šç‰ˆæœ¬ï¼Œæˆ‘ä¸‹è½½çš„æ˜¯1.3.8
 
 
 <!--language:c-->
@@ -52,24 +52,24 @@ svn 1.9.4°æ±¾ĞèÒªserf1.3.4ÒÔÉÏ°æ±¾£¬ÎÒÏÂÔØµÄÊÇ1.3.8
     scons install
     scons -c
 
-ÖØĞÂ±àÒësvn ¼ÓÉÏ --with-serf=/usr/local/serf
+é‡æ–°ç¼–è¯‘svn åŠ ä¸Š --with-serf=/usr/local/serf
 
 <!--language:c-->
 
     ./configure  --with-serf=/usr/local/serf
 
-È»ºó½«serfµÄlibÂ·¾¶Ìí¼Óµ½ÏµÍ³ËÑË÷Â·¾¶
+ç„¶åå°†serfçš„libè·¯å¾„æ·»åŠ åˆ°ç³»ç»Ÿæœç´¢è·¯å¾„
 
 <!--language:c-->
 
     vim /etc/ld.so.conf.d/serf.conf
-    ¼ÓÈëÄÚÈİ£º/usr/local/serf/lib
+    åŠ å…¥å†…å®¹ï¼š/usr/local/serf/lib
     ldconfig
 
-·ñÔò»á±¨´í
+å¦åˆ™ä¼šæŠ¥é”™
 svn: error while loading shared libraries: libserf-1.so.1: cannot open shared object file: No such file or directory
 
-svn --version ¿´ÏÂĞÅÏ¢
+svn --version çœ‹ä¸‹ä¿¡æ¯
 
 
 <!--language:c-->

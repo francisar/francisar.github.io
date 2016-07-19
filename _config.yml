@@ -75,5 +75,5 @@ deploy:
   type: git
   repo:
     github: git@github.com:francisar/francisar.github.io.git,master
-    gitcafe: git@gitcafe.com:francisar/francisar.git,gitcafe-pages
+    #gitcafe: git@gitcafe.com:francisar/francisar.git,gitcafe-pages
     #gitcafe: git@gitcafe.com:francisar/francisar.git,gitcafe-pages
