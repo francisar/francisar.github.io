@@ -98,3 +98,71 @@ function createTerminal(name, x, y,image,group){
     node.setStyle(Q.Styles.SHAPE_FILL_COLOR, "#888");
     return node;
 }
+function createStep(label, x, y, title){
+        var titleNode = graph.createText(title, x, y - 5);
+        titleNode.setStyle(Q.Styles.LABEL_BACKGROUND_COLOR, "#1D4876");
+        titleNode.setStyle(Q.Styles.LABEL_COLOR, "#FFF");
+        titleNode.setStyle(Q.Styles.LABEL_PADDING, 5);
+        titleNode.anchorPosition = Q.Position.LEFT_BOTTOM;
+        var node = graph.createText(label, x, y);
+        node.setStyle(Q.Styles.LABEL_BORDER, 1);
+        node.setStyle(Q.Styles.LABEL_BACKGROUND_COLOR, "#FFF");
+        node.setStyle(Q.Styles.LABEL_BORDER_STYLE, "#1D4876");
+        node.setStyle(Q.Styles.LABEL_FONT_SIZE, 20);
+        node.setStyle(Q.Styles.LABEL_SIZE, new Q.Size(120, 50));
+        node.anchorPosition = Q.Position.LEFT_TOP;
+
+        titleNode.host = node;
+        node.host = titleNode;
+        return node;
+
+}
+
+function createEdge_arrow(from, to, lineWidth, dash){
+        var edge = graph.createEdge(from, to);
+        edge.setStyle(Q.Styles.EDGE_WIDTH, lineWidth || 3);
+        edge.setStyle(Q.Styles.EDGE_COLOR, "#1D4876");
+    if(dash){
+                edge.setStyle(Q.Styles.EDGE_LINE_DASH, [10, 10]);
+
+    }
+        return edge;
+
+}
+function createSmallStep(label, x, y, parent){
+        var node = graph.createText(label, x, y);
+        node.setStyle(Q.Styles.LABEL_BORDER, 1);
+        node.setStyle(Q.Styles.LABEL_BORDER_STYLE, "#1D4876");
+        node.setStyle(Q.Styles.LABEL_FONT_SIZE, 16);
+        node.setStyle(Q.Styles.LABEL_PADDING, 5);
+        node.setStyle(Q.Styles.LABEL_SIZE, new Q.Size(70, 35));
+        node.setStyle(Q.Styles.LABEL_BACKGROUND_COLOR, "#FFF");
+        node.anchorPosition = Q.Position.LEFT_TOP;
+    if(parent){
+                node.parent = parent;
+                node.host = parent;
+
+    }
+        return node;
+
+}
+function createTextwithBox(label, x, y,parent,fontcolor,fontsize,bodercolor){
+    var node = graph.createText(label, x, y);
+    node.setStyle(Q.Styles.LABEL_BORDER, 1);
+    node.setStyle(Q.Styles.LABEL_PADDING, 15);
+    node.setStyle(Q.Styles.LABEL_BACKGROUND_COLOR, "#FFF");
+    if(bodercolor){
+        node.setStyle(Q.Styles.LABEL_BORDER_STYLE,bodercolor);
+    }
+    if(fontcolor){
+        node.setStyle(Q.Styles.LABEL_COLOR, fontcolor);
+    }
+    if(fontsize){
+        node.setStyle(Q.Styles.LABEL_FONT_SIZE, fontsize);
+    }
+    if(parent){
+        parent.addChild(node);
+    }
+    return node;
+
+}

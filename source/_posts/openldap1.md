@@ -28,8 +28,25 @@ LDAP是轻量目录访问协议(Lightweight Directory Access Protocol)的缩写�
 * LDAP是一种开放Internet标准，LDAP协议是跨平台的Interent协议
 
 # LDAP组织数据的方式
+<script>
+var graph = new Q.Graph(canvas);
+graph.zoomToOverview();
+var basedn = createStep("dc=franciscui,dc=cn", 220, 100, "base dn");
+var people = createSmallStep("ou=People", 280, 200,  basedn);
+var root = createSmallStep("uid=root", 230, 300,  people);
+var www = createSmallStep("uid=www", 330, 300,  people);
+var admin = createSmallStep("ou=Admin", 180, 200,  basedn);
+var group = createSmallStep("ou=Group", 380, 200,  basedn);
+var www_group = createSmallStep("cn=www", 430, 300,  group);
 
+createEdge(basedn, people, 1);
+createEdge(basedn, admin, 1);
+createEdge(basedn, group, 1);
+createEdge(group, www_group, 1);
+createEdge(people, root, 1);
+createEdge(people, www, 1);
 
+</script>
 
 
 ## 1 Entry
@@ -50,7 +67,7 @@ Base DN：LDAP目录树的最顶部就是根，也就是所谓的“Base DN"，�
 
 LDAP为人员组织机构中常见的对象都设计了属性(比如commonName，surname)。下面有一些常用的别名：
 
-## 3 Attribute
+## 3 ObjectClass
 
 对象类是属性的集合，LDAP预想了很多人员组织机构中常见的对象，并将其封装成对象类。比如人员（person）含有姓（sn）、名（cn）、电话(telephoneNumber)、密码(userPassword)等属性，单位职工(organizationalPerson)是人员(person)的继承类，除了上述属性之外还含有职务（title）、邮政编码（postalCode）、通信地址(postalAddress)等属性。
 
@@ -59,6 +76,93 @@ LDAP为人员组织机构中常见的对象都设计了属性(比如commonName�
 对象类有三种类型：结构类型（Structural）、抽象类型(Abstract)和辅助类型（Auxiliary）。结构类型是最基本的类型，它规定了对象实体的基本属性，每个条目属于且仅属于一个结构型对象类。抽象类型可以是结构类型或其他抽象类型父类，它将对象属性中共性的部分组织在一起，称为其他类的模板，条目不能直接集成抽象型对象类。辅助类型规定了对象实体的扩展属性。每个条目至少有一个结构性对象类。
 
 对象类本身是可以相互继承的，所以对象类的根类是top抽象型对象类。以常用的人员类型为例，他们的继承关系：
+<div style="height: 500px;" id="canvas1"/>
+<script>
+var graph = new Q.Graph(canvas1);
+graph.zoomToOverview();
+
+
+
+
+function createEdge(from, to, lineWidth, dash){
+        var edge = graph.createEdge(from, to);
+        edge.setStyle(Q.Styles.EDGE_WIDTH, lineWidth || 3);
+        edge.setStyle(Q.Styles.EDGE_COLOR, "#1D4876");
+    if(dash){
+                edge.setStyle(Q.Styles.EDGE_LINE_DASH, [10, 10]);
+            
+    }
+        return edge;
+
+}
+function createAssistNode(label, x, y, parent){
+        var node = graph.createText(label, x, y);
+        node.setStyle(Q.Styles.LABEL_BORDER, 1);
+        node.setStyle(Q.Styles.LABEL_BORDER_STYLE, "#A020F0");
+        node.setStyle(Q.Styles.LABEL_FONT_SIZE, 16);
+        node.setStyle(Q.Styles.LABEL_PADDING, 5);
+        node.setStyle(Q.Styles.LABEL_SIZE, new Q.Size(70, 35));
+        node.setStyle(Q.Styles.LABEL_BACKGROUND_COLOR, "#FFF");
+        node.anchorPosition = Q.Position.LEFT_TOP;
+    if(parent){
+                node.parent = parent;
+                node.host = parent;
+            
+    }
+        return node;
+
+}
+function createStructNode(label, x, y, parent){
+        var node = graph.createText(label, x, y);
+        node.setStyle(Q.Styles.LABEL_BORDER, 1);
+        node.setStyle(Q.Styles.LABEL_BORDER_STYLE, "#ED9121");
+        node.setStyle(Q.Styles.LABEL_FONT_SIZE, 16);
+        node.setStyle(Q.Styles.LABEL_PADDING, 5);
+        node.setStyle(Q.Styles.LABEL_SIZE, new Q.Size(70, 35));
+        node.setStyle(Q.Styles.LABEL_BACKGROUND_COLOR, "#FFF");
+        node.anchorPosition = Q.Position.LEFT_TOP;
+    if(parent){
+                node.parent = parent;
+                node.host = parent;
+            
+    }
+        return node;
+
+}
+function createAbstractNode(label, x, y, parent){
+        var node = graph.createText(label, x, y);
+        node.setStyle(Q.Styles.LABEL_BORDER, 1);
+        node.setStyle(Q.Styles.LABEL_BORDER_STYLE, "#1D4876");
+        node.setStyle(Q.Styles.LABEL_FONT_SIZE, 16);
+        node.setStyle(Q.Styles.LABEL_PADDING, 5);
+        node.setStyle(Q.Styles.LABEL_SIZE, new Q.Size(70, 35));
+        node.setStyle(Q.Styles.LABEL_BACKGROUND_COLOR, "#FFF");
+        node.anchorPosition = Q.Position.LEFT_TOP;
+    if(parent){
+                node.parent = parent;
+                node.host = parent;
+            
+    }
+        return node;
+
+}
+var AbstractNode = createAbstractNode("抽象类型", 400, 50);
+var StructNode = createStructNode("结构类型", 400, 100);
+var AssistNode = createAssistNode("辅助类型", 400, 150);
+var atop = createAbstractNode("top", 220, 100);
+var person = createStructNode("person", 220, 170);
+var organizationalPerson = createStructNode("organizationalPerson", 20,240,person);
+var residentialPerson = createStructNode("residentialPerson", 200, 240,  person);
+var ePerson = createAssistNode("ePerson", 380, 240,  person);
+var inetOrgPerson = createStructNode("inetOrgPerson", 20, 310,  organizationalPerson);
+createEdge(person, atop, 1);
+createEdge(organizationalPerson, person, 1);
+createEdge(residentialPerson, person, 1);
+createEdge(ePerson, person, 1);
+createEdge(inetOrgPerson, organizationalPerson, 1);
+</script>
+</div>
+
 下面是inetOrgPerson对象类的在schema中的定义，可以清楚的看到它的父类SUB和可选属性MAY、必要属性MUST(继承自organizationalPerson)，关于各属性的语法则在schema中的attributetype定义。
 
 <!--lang:c-->
@@ -85,6 +189,51 @@ LDAP为人员组织机构中常见的对象都设计了属性(比如commonName�
 ## 4 Schema
 
 对象类（ObjectClass）、属性类型（AttributeType）、语法（Syntax）分别约定了条目、属性、值，他们之间的关系如下图所示。所以这些构成了模式(Schema)——对象类的集合。条目数据在导入时通常需要接受模式检查，它确保了目录中所有的条目数据结构都是一致的。
+<div style="height: 500px;" id="canvas2"/>
+<script>
+var graph = new Q.Graph(canvas2);
+//graph.moveToCenter(0);
+graph.zoomOut(0,0);
+graph.zoomOut(0,0);
+tiaomu = createTextwithBox("条目",100,100)
+tiaomu.setStyle(Q.Styles.LABEL_ALIGN_POSITION, Q.Position.CENTER_TOP);
+tiaomu.setStyle(Q.Styles.LABEL_FONT_SIZE, 20);
+tiaomu.setStyle(Q.Styles.LABEL_SIZE, {width: 340, height: 350});
+must = createTextwithBox("must",20,120,tiaomu)
+must.setStyle(Q.Styles.LABEL_ALIGN_POSITION, Q.Position.CENTER_TOP);
+must.setStyle(Q.Styles.LABEL_FONT_SIZE, 16);
+must.setStyle(Q.Styles.LABEL_SIZE, {width: 120, height: 280});
+may = createTextwithBox("may",180,120,tiaomu)
+may.setStyle(Q.Styles.LABEL_ALIGN_POSITION, Q.Position.CENTER_TOP);
+may.setStyle(Q.Styles.LABEL_FONT_SIZE, 16);
+may.setStyle(Q.Styles.LABEL_SIZE, {width: 120, height: 280});
+      
+      
+Object1 = createTextwithBox("对象类1",-200,100,null,"#000",14,"#5E2612")
+Object2 = createTextwithBox("对象类2",-200,200,null,"#000",14,"#5E2612")
+      
+      
+attr1 = createTextwithBox("属性1",20,50,must,"#000",14,"#5E2612")
+attr2 = createTextwithBox("属性2",20,100,must,"#000",14,"#5E2612")
+attr3 = createTextwithBox("属性3",20,200,must,"#000",14,"#5E2612")
+attr4 = createTextwithBox("属性4",180,100,may,"#000",14,"#5E2612")
+attr5 = createTextwithBox("属性5",180,200,may,"#000",14,"#5E2612")
+      
+attr = createTextwithBox("属性类型",400,180)
+attr.setStyle(Q.Styles.LABEL_ALIGN_POSITION, Q.Position.CENTER_TOP);
+attr.setStyle(Q.Styles.LABEL_FONT_SIZE, 16);
+attr.setStyle(Q.Styles.LABEL_SIZE, {width: 120, height: 200});
+      
+      
+value1 = createTextwithBox("值1",400,140,attr,"#000",14,"#5E2612")
+value2 = createTextwithBox("值2",400,200,attr,"#000",14,"#5E2612")
+attr_type = createTextwithBox("值2",400,200,attr,"#000",14,"#5E2612")
+createEdge_arrow(attr5,attr,1)
+      
+      
+</script>
+</div>
+
 schema（一般在/etc/ldap/schema/目录）在导入时要注意前后顺序。
 
 ## 5 backend & database
