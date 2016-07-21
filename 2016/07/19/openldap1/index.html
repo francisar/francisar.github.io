@@ -259,26 +259,7 @@ var _hmt = _hmt || [];
 <li>这些工具可以将数据库的内容以文本格式（LDAP 数据交换格式，LDIF）呈现在您的面前</li>
 <li>LDAP是一种开放Internet标准，LDAP协议是跨平台的Interent协议</li>
 </ul>
-<h1 id="LDAP组织数据的方式">LDAP组织数据的方式</h1><script>
-var graph = new Q.Graph(canvas);
-graph.zoomToOverview();
-var basedn = createStep("dc=franciscui,dc=cn", 220, 100, "base dn");
-var people = createSmallStep("ou=People", 280, 200,  basedn);
-var root = createSmallStep("uid=root", 230, 300,  people);
-var www = createSmallStep("uid=www", 330, 300,  people);
-var admin = createSmallStep("ou=Admin", 180, 200,  basedn);
-var group = createSmallStep("ou=Group", 380, 200,  basedn);
-var www_group = createSmallStep("cn=www", 430, 300,  group);
-
-createEdge(basedn, people, 1);
-createEdge(basedn, admin, 1);
-createEdge(basedn, group, 1);
-createEdge(group, www_group, 1);
-createEdge(people, root, 1);
-createEdge(people, www, 1);
-
-</script>
-
+<h1 id="LDAP组织数据的方式">LDAP组织数据的方式</h1><div style="height: 500px;" id="canvas"><br><script><br>var graph = new Q.Graph(canvas);<br>graph.zoomToOverview();<br>var basedn = createStep(“dc=franciscui,dc=cn”, 220, 100, “base dn”);<br>var people = createSmallStep(“ou=People”, 280, 200,  basedn);<br>var root = createSmallStep(“uid=root”, 230, 300,  people);<br>var www = createSmallStep(“uid=www”, 330, 300,  people);<br>var admin = createSmallStep(“ou=Admin”, 180, 200,  basedn);<br>var group = createSmallStep(“ou=Group”, 380, 200,  basedn);<br>var www_group = createSmallStep(“cn=www”, 430, 300,  group);<br><br>createEdge(basedn, people, 1);<br>createEdge(basedn, admin, 1);<br>createEdge(basedn, group, 1);<br>createEdge(group, www_group, 1);<br>createEdge(people, root, 1);<br>createEdge(people, www, 1);<br><br></script><br></div>
 
 <h2 id="1_Entry">1 Entry</h2><p>条目，也叫记录项，是LDAP中最基本的颗粒，就像字典中的词条，或者是数据库中的记录。通常对LDAP的添加、删除、更改、检索都是以条目为基本对象的。</p>
 <p>dn：每一个条目都有一个唯一的标识名（distinguished Name ，DN），如上图中一个 dn：”cn=baby,ou=marketing,ou=people,dc=mydomain,dc=org” 。通过DN的层次型语法结构，可以方便地表示出条目在LDAP树中的位置，通常用于检索。</p>
