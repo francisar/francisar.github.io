@@ -260,7 +260,7 @@ var _hmt = _hmt || [];
 <li>LDAP是一种开放Internet标准，LDAP协议是跨平台的Interent协议</li>
 </ul>
 <h1 id="LDAP组织数据的方式">LDAP组织数据的方式</h1><p><div style="height: 500px;" id="canvas"></div></p>
-<script>
+<script type="text/javascript">
 var graph = new Q.Graph(canvas);
 graph.zoomToOverview();
 var basedn = createStep("dc=franciscui,dc=cn", 220, 100, "base dn");
@@ -277,7 +277,6 @@ createEdge(basedn, group, 1);
 createEdge(group, www_group, 1);
 createEdge(people, root, 1);
 createEdge(people, www, 1);
-
 </script>
 
 
