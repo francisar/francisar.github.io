@@ -259,8 +259,7 @@ var _hmt = _hmt || [];
 <li>这些工具可以将数据库的内容以文本格式（LDAP 数据交换格式，LDIF）呈现在您的面前</li>
 <li>LDAP是一种开放Internet标准，LDAP协议是跨平台的Interent协议</li>
 </ul>
-<h1 id="LDAP组织数据的方式">LDAP组织数据的方式</h1><div style="height: 500px;" id="canvas">
-
+<h1 id="LDAP组织数据的方式">LDAP组织数据的方式</h1><p><div style="height: 500px;" id="canvas"></div></p>
 <script>
 var graph = new Q.Graph(canvas);
 graph.zoomToOverview();
@@ -464,7 +463,7 @@ createEdge_arrow(Object2,object2box,1)
 <p>bdb是一个高性能的支持事务和故障恢复的数据库后端，可以满足绝大部分需求。许多旧文档里（包括官方）说建议将bdb作为首选后端服务（primary backend），但2.4版文档明确说hdb才是被首先推荐使用的，这从 2.4.40 版默认安装后的配置文件里也可以看出。hdb是基于bdb的，但是它通过扩展的索引和缓存技术可以加快数据访问，修改entries会更有效率，有兴趣可以访问上的链接或slapd.backends。</p>
 <p>另外config是特殊的backend，用来在运行时管理slapd的配置，它只能有一个实例，甚至无需显式在slapd.conf中配置。</p>
 <h2 id="6_LDIF">6 LDIF</h2><p>LDIF（LDAP Data Interchange Format，数据交换格式）是LDAP数据库信息的一种文本格式，用于数据的导入导出，每行都是“属性: 值”对</p>
-</div></div>
+</div>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
