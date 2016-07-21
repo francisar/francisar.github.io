@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.franciscui.cn/2016/07/19/openldap1/</loc>
+    <lastmod>2016-07-21T13:48:29.920Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.franciscui.cn/2016/07/18/svn_compile/</loc>
     <lastmod>2016-07-19T14:26:07.049Z</lastmod>
   </url>
