@@ -259,8 +259,9 @@ var _hmt = _hmt || [];
 <li>这些工具可以将数据库的内容以文本格式（LDAP 数据交换格式，LDIF）呈现在您的面前</li>
 <li>LDAP是一种开放Internet标准，LDAP协议是跨平台的Interent协议</li>
 </ul>
-<h1 id="LDAP组织数据的方式">LDAP组织数据的方式</h1><p><div style="height: 500px;" id="canvas"></div></p>
-<script type="text/javascript">
+<h1 id="LDAP组织数据的方式">LDAP组织数据的方式</h1><div style="height: 500px;" id="canvas">
+
+<script>
 var graph = new Q.Graph(canvas);
 graph.zoomToOverview();
 var basedn = createStep("dc=franciscui,dc=cn", 220, 100, "base dn");
@@ -291,7 +292,8 @@ createEdge(people, www, 1);
 <p>通过对象类可以方便的定义条目类型。每个条目可以直接继承多个对象类，这样就继承了各种属性。如果2个对象类中有相同的属性，则条目继承后只会保留1个属性。对象类同时也规定了哪些属性是基本信息，必须含有(Must 活Required，必要属性)：哪些属性是扩展信息，可以含有（May或Optional，可选属性）。</p>
 <p>对象类有三种类型：结构类型（Structural）、抽象类型(Abstract)和辅助类型（Auxiliary）。结构类型是最基本的类型，它规定了对象实体的基本属性，每个条目属于且仅属于一个结构型对象类。抽象类型可以是结构类型或其他抽象类型父类，它将对象属性中共性的部分组织在一起，称为其他类的模板，条目不能直接集成抽象型对象类。辅助类型规定了对象实体的扩展属性。每个条目至少有一个结构性对象类。</p>
 <p>对象类本身是可以相互继承的，所以对象类的根类是top抽象型对象类。以常用的人员类型为例，他们的继承关系：</p>
-<p><div style="height: 500px;" id="canvas1"></div></p>
+<div style="height: 500px;" id="canvas1">
+
 <script>
 var graph = new Q.Graph(canvas1);
 graph.zoomToOverview();
@@ -462,7 +464,7 @@ createEdge_arrow(Object2,object2box,1)
 <p>bdb是一个高性能的支持事务和故障恢复的数据库后端，可以满足绝大部分需求。许多旧文档里（包括官方）说建议将bdb作为首选后端服务（primary backend），但2.4版文档明确说hdb才是被首先推荐使用的，这从 2.4.40 版默认安装后的配置文件里也可以看出。hdb是基于bdb的，但是它通过扩展的索引和缓存技术可以加快数据访问，修改entries会更有效率，有兴趣可以访问上的链接或slapd.backends。</p>
 <p>另外config是特殊的backend，用来在运行时管理slapd的配置，它只能有一个实例，甚至无需显式在slapd.conf中配置。</p>
 <h2 id="6_LDIF">6 LDIF</h2><p>LDIF（LDAP Data Interchange Format，数据交换格式）是LDAP数据库信息的一种文本格式，用于数据的导入导出，每行都是“属性: 值”对</p>
-
+</div></div>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
