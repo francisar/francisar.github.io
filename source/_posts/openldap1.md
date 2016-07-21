@@ -207,29 +207,43 @@ may = createTextwithBox("may",180,120,tiaomu)
 may.setStyle(Q.Styles.LABEL_ALIGN_POSITION, Q.Position.CENTER_TOP);
 may.setStyle(Q.Styles.LABEL_FONT_SIZE, 16);
 may.setStyle(Q.Styles.LABEL_SIZE, {width: 120, height: 280});
-      
-      
+
+object1box = createTextwithBox("   ",100,80,must)
+object1box.setStyle(Q.Styles.LABEL_ALIGN_POSITION, Q.Position.CENTER_TOP);
+object1box.setStyle(Q.Styles.ALPHA, 0.5);
+object1box.setStyle(Q.Styles.LABEL_FONT_SIZE, 16);
+object1box.setStyle(Q.Styles.LABEL_SIZE, {width: 250, height: 100});
+
+object2box = createTextwithBox("   ",100,200,must)
+object2box.setStyle(Q.Styles.LABEL_ALIGN_POSITION, Q.Position.CENTER_TOP);
+object2box.setStyle(Q.Styles.ALPHA, 0.5);
+object2box.setStyle(Q.Styles.LABEL_FONT_SIZE, 16);
+object2box.setStyle(Q.Styles.LABEL_SIZE, {width: 250, height: 60});
+
 Object1 = createTextwithBox("对象类1",-200,100,null,"#000",14,"#5E2612")
 Object2 = createTextwithBox("对象类2",-200,200,null,"#000",14,"#5E2612")
-      
-      
+
+
 attr1 = createTextwithBox("属性1",20,50,must,"#000",14,"#5E2612")
 attr2 = createTextwithBox("属性2",20,100,must,"#000",14,"#5E2612")
 attr3 = createTextwithBox("属性3",20,200,must,"#000",14,"#5E2612")
 attr4 = createTextwithBox("属性4",180,100,may,"#000",14,"#5E2612")
 attr5 = createTextwithBox("属性5",180,200,may,"#000",14,"#5E2612")
-      
+
+
+
 attr = createTextwithBox("属性类型",400,180)
 attr.setStyle(Q.Styles.LABEL_ALIGN_POSITION, Q.Position.CENTER_TOP);
 attr.setStyle(Q.Styles.LABEL_FONT_SIZE, 16);
 attr.setStyle(Q.Styles.LABEL_SIZE, {width: 120, height: 200});
-      
-      
+
+
 value1 = createTextwithBox("值1",400,140,attr,"#000",14,"#5E2612")
 value2 = createTextwithBox("值2",400,200,attr,"#000",14,"#5E2612")
 attr_type = createTextwithBox("值2",400,200,attr,"#000",14,"#5E2612")
 createEdge_arrow(attr5,attr,1)
-      
+createEdge_arrow(Object1,object1box,1)
+createEdge_arrow(Object2,object2box,1)
       
 </script>
 </div>
@@ -245,3 +259,5 @@ bdb是一个高性能的支持事务和故障恢复的数据库后端，可以�
 另外config是特殊的backend，用来在运行时管理slapd的配置，它只能有一个实例，甚至无需显式在slapd.conf中配置。
 
 ## 6 LDIF
+
+LDIF（LDAP Data Interchange Format，数据交换格式）是LDAP数据库信息的一种文本格式，用于数据的导入导出，每行都是“属性: 值”对
