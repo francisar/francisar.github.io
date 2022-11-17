@@ -280,19 +280,19 @@ var _hmt = _hmt || [];
                 DNS:www.kubernetes.com, DNS:master01.kubernetes.com, DNS:master02.kubernetes.com, IP Address:172.20.0.1   # 除了apiserver向外部暴露的域名，apiserver在集群内部对应的service ip，与需要加到这里
     Signature Algorithm: sha256WithRSAEncryption  # 证书签名算法
 </code></pre><h3 id="kube-apiserver-证书相关配置"><a href="#kube-apiserver-证书相关配置" class="headerlink" title="kube-apiserver 证书相关配置"></a>kube-apiserver 证书相关配置</h3><!--lang:bash-->
-<pre><code>--etcd-certfile string                     SSL certification file used to secure etcd communication.
---cert-dir string                        The directory where the TLS certs are located. If --tls-cert-file and --tls-private-key-file are provided, this flag will be ignored. (default &quot;/var/run/kubernetes&quot;)
---tls-cert-file string                   File containing the default x509 Certificate for HTTPS. (CA cert, if any, concatenated after server cert). If HTTPS serving is enabled, and --tls-cert-file and --tls-private-key-file are not provided, a self-signed certificate and key are generated for the public address and saved to the directory specified by --cert-dir.
---tls-private-key-file string            File containing the default x509 private key matching --tls-cert-file.
---tls-sni-cert-key namedCertKey          A pair of x509 certificate and private key file paths, optionally suffixed with a list of domain patterns which are fully qualified domain names, possibly with prefixed wildcard segments. The domain patterns also allow IP addresses, but IPs should only be used if the apiserver has visibility to the IP address requested by a client. If no domain patterns are provided, the names of the certificate are extracted. Non-wildcard matches trump over wildcard matches, explicit domain patterns trump over extracted names. For multiple key/certificate pairs, use the --tls-sni-cert-key multiple times. Examples: &quot;example.crt,example.key&quot; or &quot;foo.crt,foo.key:*.foo.com,foo.com&quot;. (default [])
---client-ca-file string                             If set, any request presenting a client certificate signed by one of the authorities in the client-ca-file is authenticated with an identity corresponding to the CommonName of the client certificate.
---oidc-ca-file string                               If set, the OpenID server&apos;s certificate will be verified by one of the authorities in the oidc-ca-file, otherwise the host&apos;s root CA set will be used.
---requestheader-allowed-names strings               List of client certificate common names to allow to provide usernames in headers specified by --requestheader-username-headers. If empty, any client certificate validated by the authorities in --requestheader-client-ca-file is allowed.
---requestheader-client-ca-file string               Root certificate bundle to use to verify client certificates on incoming requests before trusting usernames in headers specified by --requestheader-username-headers. WARNING: generally do not depend on authorization being already done for incoming requests.
---kubelet-certificate-authority string        Path to a cert file for the certificate authority.
---kubelet-client-certificate string           Path to a client cert file for TLS.
---proxy-client-cert-file string               Client certificate used to prove the identity of the aggregator or kube-apiserver when it must call out during a request. This includes proxying requests to a user api-server and calling out to webhook admission plugins. It is expected that this cert includes a signature from the CA in the --requestheader-client-ca-file flag. That CA is published in the &apos;extension-apiserver-authentication&apos; configmap in the kube-system namespace. Components receiving calls from kube-aggregator should use that CA to perform their half of the mutual TLS verification.
---proxy-client-key-file string                Private key for the client certificate used to prove the identity of the aggregator or kube-apiserver when it must call out during a request. This includes proxying requests to a user api-server and calling out to webhook admission plugins.
+<pre><code>--etcd-certfile string                   
+--cert-dir string                      
+--tls-cert-file string                  
+--tls-private-key-file string           
+--tls-sni-cert-key namedCertKey         
+--client-ca-file string                           
+--oidc-ca-file string                              
+--requestheader-allowed-names strings             
+--requestheader-client-ca-file string              
+--kubelet-certificate-authority string        
+--kubelet-client-certificate string           
+--proxy-client-cert-file string             
+--proxy-client-key-file string               
 </code></pre><p>对应以下几种需要证书通信的配置</p>
 <ul>
 <li>client(kubectl，restapi等)：普通用户作为client与apiserver之间的通信，对各类资源进行操作<ul>
@@ -344,13 +344,11 @@ var _hmt = _hmt || [];
 </ul>
 </li>
 <li>webhook：这里指apiserver提供的admission-webhook，在数据持久化前调用webhook</li>
-<li><p>aggregation layer：扩展apiserver, 需要将自定义的api注册到k8s中，相比CRD性能更新</p>
-<ul>
-<li>aggregation 访问流程</li>
+<li>aggregation layer：扩展apiserver, 需要将自定义的api注册到k8s中，相比CRD性能更新<ul>
+<li>aggregation 访问流程<div style="height: 500px;" id="canvas"/></li>
 </ul>
 </li>
-<li><p>pod: 在pod中调用apiserver (在pod中通过serviceacount认证，pod需要认证apiserver的证书，其他几种需要client和server双向认证。)</p>
-<ul>
+<li>pod: 在pod中调用apiserver (在pod中通过serviceacount认证，pod需要认证apiserver的证书，其他几种需要client和server双向认证。)<ul>
 <li>serviecaccount同样在apiserver有两个证书配置<ul>
 <li>–service-account-key-file  (service account issue的公钥，用于验证service account)</li>
 <li>–service-account-signing-key-file (service-account-key-file 对应的密钥)</li>
