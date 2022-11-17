@@ -294,7 +294,7 @@ var _hmt = _hmt || [];
 --proxy-client-cert-file string             
 --proxy-client-key-file string               
 </code></pre><p>对应以下几种需要证书通信的配置</p>
-<ul>
+<ol>
 <li>client(kubectl，restapi等)：普通用户作为client与apiserver之间的通信，对各类资源进行操作<ul>
 <li>apiserver本身是一个http服务器，需要tls证书，对应以下两个配置<ul>
 <li>–tls-cert-file</li>
@@ -306,8 +306,6 @@ var _hmt = _hmt || [];
 <li>除此以外，apiserver需要通过证书确认client的身份，通过CN和O来识别用户，开启RBAC的用户要配置CN和O做一些授权<ul>
 <li>CN：Common Name，kube-apiserver 从证书中提取作为请求的用户名 (User Name)；浏览器使用该字段验证网站是否合法；</li>
 <li>O：Organization，kube-apiserver 从证书中提取该字段作为请求用户所属的组 (Group)</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -325,6 +323,8 @@ var _hmt = _hmt || [];
 <li>–tls-cert-file  kubelet 作为server的证书(在实际的部署过程中，该证书不建议手动生成，由集群统一签发，签发到–cert-dir= 参数指定的路径)</li>
 <li>–tls-private-key-file  kubelet 作为server的证书密钥</li>
 <li>–client-ca-file</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -360,7 +360,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-</ul>
+</ol>
 <script>
 var graph = new Q.Graph(canvas);
 graph.moveToCenter(0);
