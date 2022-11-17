@@ -363,7 +363,7 @@ var _hmt = _hmt || [];
 </ul>
 </li>
 </ul>
-<script type="application/javascript">
+<script>
 var graph = new Q.Graph(canvas);
 graph.moveToCenter(0);
 graph.zoomOut(0,0);
@@ -440,27 +440,6 @@ createEdge("OPENVPN \n 172.16.1.0/24",remote, cloud_server3, "#F80", true).uiCla
 </script>
 
 
-<h2 id="requestheader-ca"><a href="#requestheader-ca" class="headerlink" title="requestheader-ca"></a>requestheader-ca</h2><!--lang:bash-->
-<pre><code># 生成加密密钥
-genrsa -out requestheader-ca.key 2048
-# 生成证书请求
-openssl req -new -key requestheader-ca.key -out requestheader-ca.csr
-    Country Name (2 letter code) []:CN
-    State or Province Name (full name) []:BJ
-    Locality Name (eg, city) []:BJ
-    Organization Name (eg, company) []: Personal
-    Organizational Unit Name (eg, section) []: Personal
-    Common Name (eg, fully qualified host name) []:requestheader.ca.com
-    Email Address []: requestheader.ca@gmail.com
-openssl x509 -req -days 100000 -in requestheader-ca.csr  -signkey requestheader-ca.key -extfile ca_extensions.conf -out requestheader-ca.crt  -extensions v3_ext
-cat ca_extensions.conf
-    [ v3_ext ]
-    basicConstraints = CA:TRUE
-    subjectAltName=@alt_names
-
-    [ alt_names ]
-    DNS.1 = requestheader.ca.com
-</code></pre>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>

@@ -4,7 +4,7 @@
   <url>
     <loc>http://tech.mts.cab/2015/12/13/k8s_certificate/</loc>
     
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -112,7 +112,7 @@
 
   <url>
     <loc>http://tech.mts.cab/</loc>
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -120,63 +120,63 @@
   
   <url>
     <loc>http://tech.mts.cab/tags/VPN-IPsec-%E7%BD%91%E7%BB%9C-GRE/</loc>
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://tech.mts.cab/tags/VPN-openvpn-%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://tech.mts.cab/tags/K8S-metrics-server/</loc>
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://tech.mts.cab/tags/hadoop-hdfs-snappy-java/</loc>
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://tech.mts.cab/tags/K8S-%E8%AF%81%E4%B9%A6/</loc>
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://tech.mts.cab/tags/openldap/</loc>
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://tech.mts.cab/tags/python-LEGB-eval/</loc>
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://tech.mts.cab/tags/python-python%E4%BA%A4%E4%BA%92shell/</loc>
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://tech.mts.cab/tags/svn-http/</loc>
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -185,42 +185,42 @@
   
   <url>
     <loc>http://tech.mts.cab/categories/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://tech.mts.cab/categories/K8S/</loc>
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://tech.mts.cab/categories/hadoop/</loc>
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://tech.mts.cab/categories/ldap/</loc>
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://tech.mts.cab/categories/python/</loc>
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://tech.mts.cab/categories/subversion/</loc>
-    <lastmod>2022-11-16</lastmod>
+    <lastmod>2022-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
