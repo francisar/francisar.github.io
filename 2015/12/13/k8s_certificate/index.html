@@ -344,7 +344,7 @@ var _hmt = _hmt || [];
 </ul>
 </li>
 <li>webhook：这里指apiserver提供的admission-webhook，在数据持久化前调用webhook</li>
-<li>aggregation layer：扩展apiserver, 需要将自定义的api注册到k8s中，相比CRD性能更新<ul>
+<li>aggregation layer：扩展apiserver, 需要将自定义的api注册到k8s中，相比CRD灵活性更高,(Aggregated APIServer与CRD区别请参考<a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/extend-kubernetes/api-extension/custom-resources/#compare-ease-of-use">官方文档</a>)<ul>
 <li>aggregation 访问流程<div style="height: 700px;width: 900px" id="canvas"/></li>
 </ul>
 </li>
