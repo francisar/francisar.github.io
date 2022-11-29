@@ -13,7 +13,7 @@ timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://blog.franciscui.cn
+url: http://tech.mts.cab
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -73,7 +73,5 @@ theme: TKL
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo:
-    github: git@github.com:francisar/francisar.github.io.git,master
-    #gitcafe: git@gitcafe.com:francisar/francisar.git,gitcafe-pages
-    #gitcafe: git@gitcafe.com:francisar/francisar.git,gitcafe-pages
+  repo: git@github.com:francisar/francisar.github.io.git
+  branch: master
