@@ -1,3 +1,8 @@
+http://tech.mts.cab/2026/08/27/macau-crosswalk-observation/
+http://tech.mts.cab/2026/08/27/macau-currency-observation/
+http://tech.mts.cab/urban-observer/index.html
+http://tech.mts.cab/finance/index.html
+http://tech.mts.cab/2023/02/07/BlockChain_Cryptography/
 http://tech.mts.cab/2015/12/13/k8s_certificate/
 http://tech.mts.cab/2015/12/13/metric_server_troubleshooting/
 http://tech.mts.cab/2015/12/13/calico_throubleshooting/
@@ -20,9 +25,17 @@ http://tech.mts.cab/tags/openldap/
 http://tech.mts.cab/tags/python-LEGB-eval/
 http://tech.mts.cab/tags/python-python%E4%BA%A4%E4%BA%92shell/
 http://tech.mts.cab/tags/svn-http/
+http://tech.mts.cab/tags/%E5%8C%BA%E5%9D%97%E9%93%BE-%E6%AF%94%E7%89%B9%E5%B8%81/
+http://tech.mts.cab/tags/%E6%BE%B3%E9%97%A8/
+http://tech.mts.cab/tags/%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A8%E6%B8%B8/
+http://tech.mts.cab/tags/%E8%B4%A7%E5%B8%81/
+http://tech.mts.cab/tags/%E4%BA%A4%E9%80%9A/
+http://tech.mts.cab/tags/%E4%BA%BA%E8%A1%8C%E6%A8%AA%E9%81%93/
 http://tech.mts.cab/categories/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/
 http://tech.mts.cab/categories/K8S/
 http://tech.mts.cab/categories/hadoop/
 http://tech.mts.cab/categories/ldap/
 http://tech.mts.cab/categories/python/
 http://tech.mts.cab/categories/subversion/
+http://tech.mts.cab/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/
+http://tech.mts.cab/categories/%E5%9F%8E%E5%B8%82%E8%A7%82%E5%AF%9F/
