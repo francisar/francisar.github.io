@@ -5,6 +5,16 @@
   "hexo": {
     "version": "6.3.0"
   },
+  "scripts": {
+    "build": "hexo generate",
+    "check": "npm run research:check && hexo generate --silent",
+    "clean": "hexo clean",
+    "new": "hexo new",
+    "publish": "hexo publish",
+    "research:check": "node scripts/check-research-structure.js",
+    "research:new": "node scripts/new-research-entry.js",
+    "server": "hexo server"
+  },
   "dependencies": {
     "hexo": "^6.3.0",
     "hexo-deployer-git": "^3.0.0",

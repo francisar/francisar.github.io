@@ -1,0 +1,33 @@
+observation_id: "HK-CROSSBORDER-001"
+city: "香港"
+district: "机场"
+location_detail: "机场；具体航站楼、停车区和观察点未记录"
+date_time: "2026-08-20；具体时间未记录"
+
+raw_observation: "在机场看到一辆同时挂有香港牌和广东牌的车辆，现场将其识别为‘两地牌车’。"
+visible_evidence:
+  - "同一车辆上同时出现香港车牌和广东车牌。"
+  - "车辆位于机场场景内。"
+  - "现场观察记录使用了‘两地牌车’这一称呼。"
+
+user_reaction_or_surprise: "注意到同一车辆同时出现香港牌和广东牌。"
+why_noteworthy: "在机场这一跨境交通场景中，观察到同一车辆上同时出现两个地区的车牌。"
+
+media: []
+
+repeat_count: 1
+
+known_context:
+  - "该观察发生于2026年8月香港澳门旅行期间。"
+
+uncertainties:
+  - "未记录机场名称、航站楼、停车区和具体观察位置。"
+  - "未记录车辆品牌、车型、颜色、车牌号码和车牌分别位于车辆哪个位置。"
+  - "未核验该车辆的跨境通行资质，也未核验其是否属于通常所称的‘两地牌车’。"
+  - "未记录现场是否还有其他具有类似车牌配置的车辆。"
+
+interpretation: null
+
+status:
+  observed: true
+  verified: false

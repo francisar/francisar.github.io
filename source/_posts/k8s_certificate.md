@@ -88,7 +88,7 @@ tag: K8S 证书
       * --cert-file etcd 作为server的证书
       * --key-file etcd 作为server的证书密钥
 3. webhook：这里指apiserver提供的admission-webhook，在数据持久化前调用webhook
-4. aggregation layer：扩展apiserver, 需要将自定义的api注册到k8s中，相比CRD性能更新
+4. aggregation layer：扩展apiserver, 需要将自定义的api注册到k8s中，相比CRD灵活性更高,(Aggregated APIServer与CRD区别请参考[官方文档](https://kubernetes.io/zh-cn/docs/concepts/extend-kubernetes/api-extension/custom-resources/#compare-ease-of-use))
     * aggregation 访问流程
       <div style="height: 700px;width: 900px" id="canvas"/>
 5. pod: 在pod中调用apiserver (在pod中通过serviceacount认证，pod需要认证apiserver的证书，其他几种需要client和server双向认证。)
